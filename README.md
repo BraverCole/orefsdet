@@ -25,8 +25,8 @@ To date, FewX implements the following algorithms:
 ## Results on MS COCO
 
 ### Few Shot Object Detection
-<table align="center">
-    <tr>
+<table >
+    <tr align="center">
         <td rowspan="2">Method</td>
         <td colspan="2">5-shot</td>
         <td colspan="2">15-shot</td>
