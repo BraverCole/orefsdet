@@ -60,7 +60,7 @@ python -m pip install detectron2 -f \
 Run `sh all.sh` in the root dir. 
 
 ### Training
-Order
+change all.sh
 ```
 rm support_dir/support_feature.pkl
 CUDA_VISIBLE_DEVICES=0 python3 fsod_train_net.py --num-gpus 1 \
@@ -72,7 +72,6 @@ sh all.sh
 ```
 ### Evaluation
 change the all.sh
-Order
 ```
 CUDA_VISIBLE_DEVICES=0 python3 fsod_train_net.py --num-gpus 1 \
 	--config-file configs/fsod/finetune_R_50_C4_1x.yaml \
