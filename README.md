@@ -24,7 +24,7 @@ To date, FewX implements the following algorithms:
 
 ## Results on MS COCO
 
-### Few Shot Object Detection
+### OreFsdet and baseline
 <table >
     <tr align="center">
         <th rowspan="2">Method</th>
@@ -41,7 +41,7 @@ To date, FewX implements the following algorithms:
         <td>AP75</td>
     </tr>
     <tr align="center">
-        <td>Attentionrpn</td>
+        <td>Attentionrpn(baseline)</td>
         <td>25.1</td>
         <td>27.0</td>
         <td>29.2</td>
