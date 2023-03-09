@@ -1,4 +1,4 @@
-# FewX
+# OreFSDet
 
 **OreFSDet** is based on [**FewX**](https://github.com/fanq15/FewX) ( an open source toolbox on top of Detectron2 for data-limited instance-level recognition tasks, e.g.) 
 
@@ -61,12 +61,26 @@ python -m pip install detectron2 -f \
 
 Run `sh all.sh` in the root dir. (This script uses `4 GPUs`. You can change the GPU number. If you use 2 GPUs with unchanged batch size (8), please [halve the learning rate](https://github.com/fanq15/FewX/issues/6#issuecomment-674367388).)C
 
-
+Training
 ```
-cd FewX
+rm support_dir/support_feature.pkl
+CUDA_VISIBLE_DEVICES=0 python3 fsod_train_net.py --num-gpus 1 \
+	--config-file configs/fsod/finetune_R_50_C4_1x.yaml 2>&1 | tee log/fsod_finetune_stone_R50_train_log_5shot.txt
+```
+Then
+```
 sh all.sh
 ```
-
+Evaluation
+change the all.sh
+```
+CUDA_VISIBLE_DEVICES=0 python3 fsod_train_net.py --num-gpus 1 \
+	--config-file configs/fsod/finetune_R_50_C4_1x.yaml \
+	--eval-only MODEL.WEIGHTS ./output/fsod/finetune_dir/R_50_C4_1x_stone_5shot/model_final.pth 2>&1 | tee log/fsod_finetune_stone_R50_test_log_5shot.txt
+```
+```
+sh all.sh
+```
 
 
 ## Citing FewX
