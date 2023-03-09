@@ -32,7 +32,7 @@ To date, FewX implements the following algorithms:
         <td colspan="2">15-shot</td>
         <td colspan="2">25-shot</td>
     </tr>
-    <tr>
+    <tr align="center">
         <td>AP</td>
         <td>AP75</td>
         <td>AP</td>
@@ -40,7 +40,7 @@ To date, FewX implements the following algorithms:
         <td>AP</td>
         <td>AP75</td>
     </tr>
-    <tr>
+    <tr align="center">
         <td>Attentionrpn</td>
         <td>25.1</td>
         <td>27.0</td>
@@ -49,7 +49,7 @@ To date, FewX implements the following algorithms:
         <td>30.8</td>
         <td>37.0</td>
     </tr>
-    <tr>
+    <tr align="center">
         <td>orefsdet</td>
         <td>36.2</td>
         <td>33.0</td>
