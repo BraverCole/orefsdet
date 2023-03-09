@@ -38,8 +38,6 @@
     </tr>
 </table>
 
-## Results on MS COCO
-
 
 The model can be obtained frome here <a href="https://drive.google.com/file/d/1VdGVmcufa2JBmZUfwAcDj1OL5tKTFhQ1/view?usp=sharing"> base model</a>&nbsp;\.
 
@@ -62,26 +60,36 @@ python -m pip install detectron2 -f \
 Run `sh all.sh` in the root dir. (This script uses `4 GPUs`. You can change the GPU number. If you use 2 GPUs with unchanged batch size (8), please [halve the learning rate](https://github.com/fanq15/FewX/issues/6#issuecomment-674367388).)C
 
 Training
+Order
 ```
 rm support_dir/support_feature.pkl
 CUDA_VISIBLE_DEVICES=0 python3 fsod_train_net.py --num-gpus 1 \
 	--config-file configs/fsod/finetune_R_50_C4_1x.yaml 2>&1 | tee log/fsod_finetune_stone_R50_train_log_5shot.txt
 ```
-Then
+Then, run the following
 ```
 sh all.sh
 ```
 Evaluation
 change the all.sh
+Order
 ```
 CUDA_VISIBLE_DEVICES=0 python3 fsod_train_net.py --num-gpus 1 \
 	--config-file configs/fsod/finetune_R_50_C4_1x.yaml \
 	--eval-only MODEL.WEIGHTS ./output/fsod/finetune_dir/R_50_C4_1x_stone_5shot/model_final.pth 2>&1 | tee log/fsod_finetune_stone_R50_test_log_5shot.txt
 ```
+just run the following
 ```
 sh all.sh
 ```
-
+## Step 3: Demo
+```
+python demo.py  \
+    --config-file configs/fsod/finetune_R_50_C4_1x.yaml \
+    --input directory/*.png \
+    --output results \
+    --opts MODEL.WEIGHTS ./output/fsod/finetune_dir/R_50_C4_1x/model_final.pth
+```
 
 ## Citing FewX
 If you use this toolbox in your research or wish to refer to the baseline results, please use the following BibTeX entries.
