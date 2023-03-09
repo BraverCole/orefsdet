@@ -82,7 +82,7 @@ just run the following
 ```
 sh all.sh
 ```
-## Demo
+## Visualize the results
 ```
 python demo.py  \
     --config-file configs/fsod/finetune_R_50_C4_1x.yaml \
