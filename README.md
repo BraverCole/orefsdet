@@ -1,30 +1,8 @@
 # FewX
 
-**FewX** is an open source toolbox on top of Detectron2 for data-limited instance-level recognition tasks, e.g., few-shot object detection, few-shot instance segmentation, partially supervised instance segmentation and so on. 
+**OreFSDet** is based on [**FewX**](https://github.com/fanq15/FewX) ( an open source toolbox on top of Detectron2 for data-limited instance-level recognition tasks, e.g.) 
 
-All data-limited instance-level recognition works from **Qi Fan**  (HKUST, qfanaa@connect.ust.hk) are open-sourced here.
-
-To date, FewX implements the following algorithms:
-
-- [FSOD](https://arxiv.org/abs/1908.01998): few-shot object detection with [FSOD dataset](https://github.com/fanq15/Few-Shot-Object-Detection-Dataset).
-- [CPMask](https://arxiv.org/abs/2007.12387): partially supervised/fully supervised/few-shot instance segmentation (to be released).
-- [FSVOD](https://arxiv.org/abs/2104.14805): few-shot video object detection with [FSVOD-500 dataset](https://drive.google.com/drive/folders/1DDQ81A8yVj7D8vLUS01657ATr2sK1zgC?usp=sharing) and [FSYTV-40 dataset](https://drive.google.com/drive/folders/1a1PpfAxeYL7AbxYViDDnx7ACFtRohVL5?usp=sharing).
-
-## Highlights
-- **State-of-the-art performance.**  
-  - FSOD is the best few-shot object detection model. (This model can be directly applied to novel classes without finetuning. And finetuning can bring better performance.)
-  - CPMask is the best partially supervised/few-shot instance segmentation model.
-- **Easy to use.** You only need to run 3 code lines to conduct the entire experiment.
-  - Install Pre-Built Detectron2 in one code line.
-  - Prepare dataset in one code line. (You need to first download the dataset and change the **data path** in the script.)
-  - Training and evaluation in one code line.
-
-## Updates
-- FewX has been released. (09/08/2020)
-
-## Results on MS COCO
-
-### OreFsdet and baseline
+## OreFsdet and baseline on ore dataset
 <table >
     <tr align="center">
         <th rowspan="2">Method</th>
@@ -60,19 +38,12 @@ To date, FewX implements the following algorithms:
     </tr>
 </table>
 
+## Results on MS COCO
 
 
+The model can be obtained frome here <a href="https://drive.google.com/file/d/1VdGVmcufa2JBmZUfwAcDj1OL5tKTFhQ1/view?usp=sharing"> base model</a>&nbsp;\.
 
-|Method|AP|Evaluation way&shot|box AP|download|
-|:--------:|:--------:|:--------:|:--------:|:--:|
-|Attentionrpn|AP|AP50|11.1|-|
-|FSOD (this implementation)|COCO (non-voc)|full-way 10-shot|**12.0**|<a href="https://drive.google.com/file/d/1VO1XMKtiU4pMNPfIvw5iZRqlO9dr5BhN/view?usp=sharing">model</a>&nbsp;\|&nbsp;<a href="https://drive.google.com/file/d/18eC5Nn1HBJcDf75CoLWOwncYFXzHGXFD/view?usp=sharing">metrics</a>|
 
-The results are reported on the COCO voc subset with **ResNet-50** backbone.
-
-The model only trained on base classes is <a href="https://drive.google.com/file/d/1VdGVmcufa2JBmZUfwAcDj1OL5tKTFhQ1/view?usp=sharing"> base model</a>&nbsp;\.
-
-You can reference the [original FSOD implementation](https://github.com/fanq15/FSOD-code) on the [Few-Shot-Object-Detection-Dataset](https://github.com/fanq15/Few-Shot-Object-Detection-Dataset).
 
 ## Step 1: Installation
 You only need to install [detectron2](https://github.com/facebookresearch/detectron2/blob/master/INSTALL.md). We recommend the Pre-Built Detectron2 (Linux only) version with pytorch 1.7. I use the Pre-Built Detectron2 with CUDA 10.1 and pytorch 1.7 and you can run this code to install it.
@@ -130,10 +101,4 @@ If you use this toolbox in your research or wish to refer to the baseline result
   }
   ```
 
-> ```
-> C:\Users\admin\Desktop\FewX-master
-> scp C:\Users\admin\Desktop\FewX-master root@10.8.58.47:/home/lcheng/Desktop
-> 
-> ```
->
-> 
+
