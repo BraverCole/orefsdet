@@ -91,6 +91,6 @@ python demo.py  \
     --opts MODEL.WEIGHTS ./output/fsod/finetune_dir/R_50_C4_1x/model_final.pth
 ```
 
-
+This repo is developed based on [FewX](https://github.com/fanq15/FewX) and [detectron2](https://github.com/facebookresearch/detectron2/blob/master/INSTALL.md). Thanks for their wonderful codebases.
 
 
