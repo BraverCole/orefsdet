@@ -25,10 +25,16 @@ To date, FewX implements the following algorithms:
 ## Results on MS COCO
 
 ### Few Shot Object Detection
+| Method       |      5-shot    |     15-shot     |      25-shot    |
+|              |--------|-------|---------|-------|---------|-------|
+| Method       | AP     | AP^75 | AP      | AP^75 | AP      | AP^75 |
+| Attentionrpn | 25.1   | 27.0  | 29.2    | 34.5  | 30.8    | 37.0  |
+| orefsdet     | 36.2   | 33.0  | 39.3    | 45.6  | 44.7    | 48.4  |
 
-|Method|Training Dataset|Evaluation way&shot|box AP|download|
+
+|Method|AP|Evaluation way&shot|box AP|download|
 |:--------:|:--------:|:--------:|:--------:|:--:|
-|FSOD (paper)|COCO (non-voc)|full-way 10-shot|11.1|-|
+|Attentionrpn|AP|AP50|11.1|-|
 |FSOD (this implementation)|COCO (non-voc)|full-way 10-shot|**12.0**|<a href="https://drive.google.com/file/d/1VO1XMKtiU4pMNPfIvw5iZRqlO9dr5BhN/view?usp=sharing">model</a>&nbsp;\|&nbsp;<a href="https://drive.google.com/file/d/18eC5Nn1HBJcDf75CoLWOwncYFXzHGXFD/view?usp=sharing">metrics</a>|
 
 The results are reported on the COCO voc subset with **ResNet-50** backbone.
