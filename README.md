@@ -57,7 +57,7 @@ python -m pip install detectron2 -f \
 
 ## Step 3: Training and Evaluation
 
-Run `sh all.sh` in the root dir. (This script uses `4 GPUs`. You can change the GPU number. If you use 2 GPUs with unchanged batch size (8), please [halve the learning rate](https://github.com/fanq15/FewX/issues/6#issuecomment-674367388).)C
+Run `sh all.sh` in the root dir. 
 
 Training
 Order
