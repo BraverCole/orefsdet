@@ -70,7 +70,7 @@ class FsodRCNN(nn.Module):
         
         
         
-        self.channel_attention = ParallelPolarizedSelfAttention()
+        self.channel_attention = channel_Attention()
         self.agp=nn.AdaptiveAvgPool2d((14,14))
     @property
     def device(self):
@@ -510,7 +510,7 @@ class  PositionalEncoding(nn.Module):
         return x
 
 
-class ParallelPolarizedSelfAttention(nn.Module):
+class channel_Attention(nn.Module):
 
     def __init__(self, channel=1024):
         super().__init__()
