@@ -59,7 +59,7 @@ python -m pip install detectron2 -f \
 
 Run `sh all.sh` in the root dir. 
 
-Training
+### Training
 Order
 ```
 rm support_dir/support_feature.pkl
@@ -70,7 +70,7 @@ Then, run the following
 ```
 sh all.sh
 ```
-Evaluation
+### Evaluation
 change the all.sh
 Order
 ```
