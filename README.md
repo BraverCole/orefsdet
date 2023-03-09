@@ -36,7 +36,6 @@ To date, FewX implements the following algorithms:
         <td></td>
     </tr>
     <tr>
-       
         <td>AP</td>
         <td>AP75</td>
         <td>AP</td>
