@@ -29,11 +29,8 @@ To date, FewX implements the following algorithms:
     <tr>
         <td rowspan="2">Method</td>
         <td colspan="2">5-shot</td>
-        <td></td>
         <td colspan="2">15-shot</td>
-        <td></td>
         <td colspan="2">25-shot</td>
-        <td></td>
     </tr>
     <tr>
         <td>AP</td>
@@ -46,16 +43,16 @@ To date, FewX implements the following algorithms:
     <tr>
         <td>Attentionrpn</td>
         <td>25.1</td>
-        <td>27</td>
+        <td>27.0</td>
         <td>29.2</td>
         <td>34.5</td>
         <td>30.8</td>
-        <td>37</td>
+        <td>37.0</td>
     </tr>
     <tr>
         <td>orefsdet</td>
         <td>36.2</td>
-        <td>33</td>
+        <td>33.0</td>
         <td>39.3</td>
         <td>45.6</td>
         <td>44.7</td>
