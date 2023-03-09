@@ -25,7 +25,45 @@ To date, FewX implements the following algorithms:
 ## Results on MS COCO
 
 ### Few Shot Object Detection
-| Shot       | 5-shot |       | 15-shot |       | 25-shot |       |
+<table>
+    <tr>
+        <td>Method</td>
+        <td>5-shot</td>
+        <td></td>
+        <td>15-shot</td>
+        <td></td>
+        <td>25-shot</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>AP</td>
+        <td>AP75</td>
+        <td>AP</td>
+        <td>AP75</td>
+        <td>AP</td>
+        <td>AP75</td>
+    </tr>
+    <tr>
+        <td>Attentionrpn</td>
+        <td>25.1</td>
+        <td>27</td>
+        <td>29.2</td>
+        <td>34.5</td>
+        <td>30.8</td>
+        <td>37</td>
+    </tr>
+    <tr>
+        <td>orefsdet</td>
+        <td>36.2</td>
+        <td>33</td>
+        <td>39.3</td>
+        <td>45.6</td>
+        <td>44.7</td>
+        <td>48.4</td>
+    </tr>
+</table>
+| /       | 5-shot |       | 15-shot |       | 25-shot |       |
 |--------------|--------|-------|---------|-------|---------|-------|
 |       Method       | AP     | AP^75 | AP      | AP^75 | AP      | AP^75 |
 | Attentionrpn | 25.1   | 27.0  | 29.2    | 34.5  | 30.8    | 37.0  |
