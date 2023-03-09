@@ -54,18 +54,13 @@ python -m pip install detectron2 -f \
 ```
 
 ## Step 2: Prepare dataset
-- Prepare for coco dataset following [this instruction](https://github.com/facebookresearch/detectron2/tree/master/datasets).
+- Prepare for ore dataset, you can get from [here](https://github.com/facebookresearch/detectron2/tree/master/datasets). The ore dataset has been handled under few-shot setting, you only need to add it to dataset.
 
-- `cd datasets`, change the `DATA_ROOT` in the `generate_support_data.sh` to your data path and run `sh generate_support_data.sh`.
-
-``` 
-cd FewX/datasets
-sh generate_support_data.sh
-```
 
 ## Step 3: Training and Evaluation
 
 Run `sh all.sh` in the root dir. (This script uses `4 GPUs`. You can change the GPU number. If you use 2 GPUs with unchanged batch size (8), please [halve the learning rate](https://github.com/fanq15/FewX/issues/6#issuecomment-674367388).)C
+
 
 ```
 cd FewX
@@ -73,9 +68,6 @@ sh all.sh
 ```
 
 
-## TODO
- - [ ] Add other dataset results to FSOD.
- - [ ] Add [CPMask](https://arxiv.org/abs/2007.12387) code with partially supervised instance segmentation, fully supervised instance segmentation and few-shot instance segmentation.
 
 ## Citing FewX
 If you use this toolbox in your research or wish to refer to the baseline results, please use the following BibTeX entries.
