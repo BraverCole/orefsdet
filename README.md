@@ -39,7 +39,7 @@
 </table>
 
 
-The model can be obtained frome here <a href="https://drive.google.com/file/d/1VdGVmcufa2JBmZUfwAcDj1OL5tKTFhQ1/view?usp=sharing"> base model</a>&nbsp;\.
+The model can be obtained from here <a href="https://drive.google.com/file/d/1iv5aXgT7ExHfuZi6lIzdMb-pCB-IduSK/view?usp=share_link"> model</a>&nbsp;\.
 
 
 
