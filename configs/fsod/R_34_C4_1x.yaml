@@ -1,0 +1,10 @@
+_BASE_: "Base-FSOD-C4.yaml"
+MODEL:
+  WEIGHTS:  /home/lcheng/FewX-master/FewX-master/tool/r34.pkl #"detectron2://ImageNetPretrained/MSRA/R-.pkl"
+  MASK_ON: False
+  PIXEL_MEAN: [123.675, 116.280, 103.530]
+  PIXEL_STD: [58.395, 57.120, 57.375]
+  RESNETS:
+    DEPTH: 34
+    STRIDE_IN_1X1: False
+OUTPUT_DIR: './output/fsod/R_34_C4_1x_3.0'

@@ -1,0 +1,37 @@
+_BASE_: "Base-FSOD-C4.yaml"
+MODEL:
+  WEIGHTS: "./output/fsod/R_50_C4_1x/model_final.pth" 
+  MASK_ON: False
+  RESNETS:
+    DEPTH: 50
+  BACKBONE:
+    FREEZE_AT: 5
+  ROI_HEADS:
+    NMS_THRESH_TEST: 0.85 #0.85 #0.5
+  RPN:
+    # PRE_NMS_TOPK_TRAIN: 2000
+    # PRE_NMS_TOPK_TEST: 1000
+    # POST_NMS_TOPK_TRAIN: 400
+    # POST_NMS_TOPK_TEST: 200
+    NMS_THRESH: 0.5 #0.5  # 0.7
+DATASETS:
+  TRAIN: ("coco_2017_train_stone",)
+  TEST: ("coco_2017_val_stone",)
+SOLVER:
+  IMS_PER_BATCH: 2
+  BASE_LR: 0.0001
+  STEPS:  (2000,3000) #(2000,3000)
+  MAX_ITER:  3100  # 3100
+  WARMUP_ITERS: 200
+  CHECKPOINT_PERIOD: 100
+INPUT:
+  FS:
+    FEW_SHOT: False # True #False,fine-tune
+    SUPPORT_WAY: 1
+    SUPPORT_SHOT: 24
+  MIN_SIZE_TRAIN:  (240, 272, 304, 336, 368, 400) #(400, ) #(220, 220) #(240, 272, 304, 336, 368, 400) #(440, 472, 504, 536, 568, 600)
+  MAX_SIZE_TRAIN: 1000
+  MIN_SIZE_TEST: 400 # 620 # 370 # 460 430 400
+  MAX_SIZE_TEST: 1000 
+OUTPUT_DIR: './output/fsod/finetune_dir/R_50_C4_1x_stone'
+

@@ -1,0 +1,969 @@
+Command Line Args: Namespace(config_file='configs/fsod/finetune_R_50_C4_1x_coco_5shot.yaml', dist_url='tcp://127.0.0.1:50158', eval_only=False, machine_rank=0, num_gpus=1, num_machines=1, opts=[], resume=False)
+[32m[02/01 20:48:19 detectron2]: [0mRank of current process: 0. World size: 1
+[32m[02/01 20:48:20 detectron2]: [0mEnvironment info:
+----------------------  -----------------------------------------------------------------------------------------
+sys.platform            linux
+Python                  3.6.13 |Anaconda, Inc.| (default, Jun  4 2021, 14:25:59) [GCC 7.5.0]
+numpy                   1.19.5
+detectron2              0.5 @/home/lcheng/anaconda3/envs/orefsdet/lib/python3.6/site-packages/detectron2
+Compiler                GCC 7.3
+CUDA compiler           CUDA 10.1
+detectron2 arch flags   3.7, 5.0, 5.2, 6.0, 6.1, 7.0, 7.5
+DETECTRON2_ENV_MODULE   <not set>
+PyTorch                 1.7.1+cu101 @/home/lcheng/anaconda3/envs/orefsdet/lib/python3.6/site-packages/torch
+PyTorch debug build     False
+GPU available           Yes
+GPU 0                   NVIDIA GeForce RTX 2080 Ti (arch=7.5)
+CUDA_HOME               /usr/local/cuda
+Pillow                  8.4.0
+torchvision             0.8.2+cu101 @/home/lcheng/anaconda3/envs/orefsdet/lib/python3.6/site-packages/torchvision
+torchvision arch flags  3.5, 5.0, 6.0, 7.0, 7.5
+fvcore                  0.1.5.post20220212
+iopath                  0.1.8
+cv2                     4.5.5
+----------------------  -----------------------------------------------------------------------------------------
+PyTorch built with:
+  - GCC 7.3
+  - C++ Version: 201402
+  - Intel(R) Math Kernel Library Version 2020.0.0 Product Build 20191122 for Intel(R) 64 architecture applications
+  - Intel(R) MKL-DNN v1.6.0 (Git Hash 5ef631a030a6f73131c77892041042805a06064f)
+  - OpenMP 201511 (a.k.a. OpenMP 4.5)
+  - NNPACK is enabled
+  - CPU capability usage: AVX2
+  - CUDA Runtime 10.1
+  - NVCC architecture flags: -gencode;arch=compute_37,code=sm_37;-gencode;arch=compute_50,code=sm_50;-gencode;arch=compute_60,code=sm_60;-gencode;arch=compute_70,code=sm_70;-gencode;arch=compute_75,code=sm_75
+  - CuDNN 7.6.3
+  - Magma 2.5.2
+  - Build settings: BLAS=MKL, BUILD_TYPE=Release, CXX_FLAGS= -Wno-deprecated -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -fopenmp -DNDEBUG -DUSE_FBGEMM -DUSE_QNNPACK -DUSE_PYTORCH_QNNPACK -DUSE_XNNPACK -DUSE_VULKAN_WRAPPER -O2 -fPIC -Wno-narrowing -Wall -Wextra -Werror=return-type -Wno-missing-field-initializers -Wno-type-limits -Wno-array-bounds -Wno-unknown-pragmas -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable -Wno-unused-function -Wno-unused-result -Wno-unused-local-typedefs -Wno-strict-overflow -Wno-strict-aliasing -Wno-error=deprecated-declarations -Wno-stringop-overflow -Wno-psabi -Wno-error=pedantic -Wno-error=redundant-decls -Wno-error=old-style-cast -fdiagnostics-color=always -faligned-new -Wno-unused-but-set-variable -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Wno-stringop-overflow, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, PERF_WITH_AVX512=1, USE_CUDA=ON, USE_EXCEPTION_PTR=1, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=ON, USE_NNPACK=ON, USE_OPENMP=ON, 
+
+[32m[02/01 20:48:20 detectron2]: [0mCommand line arguments: Namespace(config_file='configs/fsod/finetune_R_50_C4_1x_coco_5shot.yaml', dist_url='tcp://127.0.0.1:50158', eval_only=False, machine_rank=0, num_gpus=1, num_machines=1, opts=[], resume=False)
+[32m[02/01 20:48:20 detectron2]: [0mContents of args.config_file=configs/fsod/finetune_R_50_C4_1x_coco_5shot.yaml:
+_BASE_: "Base-FSOD-C4.yaml"
+MODEL:
+  WEIGHTS: "./output/fsod/pre_train_model/model_final.pth" 
+  MASK_ON: False
+  RESNETS:
+    DEPTH: 50
+  BACKBONE:
+    FREEZE_AT: 5
+DATASETS:
+  TRAIN: ("coco_2017_train_voc_5_shot",)
+  TEST: ("coco_2017_val",)
+SOLVER:
+  IMS_PER_BATCH: 8
+  BASE_LR: 0.0001
+  STEPS: (2000, 2900)
+  MAX_ITER: 3000
+  WARMUP_ITERS: 200
+  CHECKPOINT_PERIOD: 100
+INPUT:
+  FS:
+    FEW_SHOT: True
+    SUPPORT_WAY: 2
+    SUPPORT_SHOT: 4
+  MIN_SIZE_TRAIN: (440, 472, 504, 536, 568, 600)
+  MAX_SIZE_TRAIN: 1000
+  MIN_SIZE_TEST: 600
+  MAX_SIZE_TEST: 1000
+OUTPUT_DIR: './output/fsod/finetune_dir/R_50_C4_1x_5shot'
+
+
+[32m[02/01 20:48:20 detectron2]: [0mRunning with full config:
+CUDNN_BENCHMARK: false
+DATALOADER:
+  ASPECT_RATIO_GROUPING: true
+  FILTER_EMPTY_ANNOTATIONS: true
+  NUM_WORKERS: 8
+  REPEAT_THRESHOLD: 0.0
+  SAMPLER_TRAIN: TrainingSampler
+DATASETS:
+  PRECOMPUTED_PROPOSAL_TOPK_TEST: 1000
+  PRECOMPUTED_PROPOSAL_TOPK_TRAIN: 2000
+  PROPOSAL_FILES_TEST: []
+  PROPOSAL_FILES_TRAIN: []
+  TEST:
+  - coco_2017_val
+  TRAIN:
+  - coco_2017_train_voc_5_shot
+GLOBAL:
+  HACK: 1.0
+INPUT:
+  CROP:
+    ENABLED: false
+    SIZE:
+    - 0.9
+    - 0.9
+    TYPE: relative_range
+  FORMAT: BGR
+  FS:
+    FEW_SHOT: true
+    SUPPORT_SHOT: 4
+    SUPPORT_WAY: 2
+  MASK_FORMAT: polygon
+  MAX_SIZE_TEST: 1000
+  MAX_SIZE_TRAIN: 1000
+  MIN_SIZE_TEST: 600
+  MIN_SIZE_TRAIN:
+  - 440
+  - 472
+  - 504
+  - 536
+  - 568
+  - 600
+  MIN_SIZE_TRAIN_SAMPLING: choice
+  RANDOM_FLIP: horizontal
+MODEL:
+  ANCHOR_GENERATOR:
+    ANGLES:
+    - - -90
+      - 0
+      - 90
+    ASPECT_RATIOS:
+    - - 0.5
+      - 1.0
+      - 2.0
+    NAME: DefaultAnchorGenerator
+    OFFSET: 0.0
+    SIZES:
+    - - 32
+      - 64
+      - 128
+      - 256
+      - 512
+  BACKBONE:
+    FREEZE_AT: 5
+    NAME: build_resnet_backbone
+  DEVICE: cuda
+  FPN:
+    FUSE_TYPE: sum
+    IN_FEATURES: []
+    NORM: ''
+    OUT_CHANNELS: 256
+  KEYPOINT_ON: false
+  LOAD_PROPOSALS: false
+  MASK_ON: false
+  META_ARCHITECTURE: FsodRCNN
+  PANOPTIC_FPN:
+    COMBINE:
+      ENABLED: true
+      INSTANCES_CONFIDENCE_THRESH: 0.5
+      OVERLAP_THRESH: 0.5
+      STUFF_AREA_LIMIT: 4096
+    INSTANCE_LOSS_WEIGHT: 1.0
+  PIXEL_MEAN:
+  - 103.53
+  - 116.28
+  - 123.675
+  PIXEL_STD:
+  - 1.0
+  - 1.0
+  - 1.0
+  PROPOSAL_GENERATOR:
+    MIN_SIZE: 0
+    NAME: FsodRPN
+  RESNETS:
+    DEFORM_MODULATED: false
+    DEFORM_NUM_GROUPS: 1
+    DEFORM_ON_PER_STAGE:
+    - false
+    - false
+    - false
+    - false
+    DEPTH: 50
+    NORM: FrozenBN
+    NUM_GROUPS: 1
+    OUT_FEATURES:
+    - res4
+    RES2_OUT_CHANNELS: 256
+    RES5_DILATION: 1
+    STEM_OUT_CHANNELS: 64
+    STRIDE_IN_1X1: true
+    WIDTH_PER_GROUP: 64
+  RETINANET:
+    BBOX_REG_LOSS_TYPE: smooth_l1
+    BBOX_REG_WEIGHTS:
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    FOCAL_LOSS_ALPHA: 0.25
+    FOCAL_LOSS_GAMMA: 2.0
+    IN_FEATURES:
+    - p3
+    - p4
+    - p5
+    - p6
+    - p7
+    IOU_LABELS:
+    - 0
+    - -1
+    - 1
+    IOU_THRESHOLDS:
+    - 0.4
+    - 0.5
+    NMS_THRESH_TEST: 0.5
+    NORM: ''
+    NUM_CLASSES: 1
+    NUM_CONVS: 4
+    PRIOR_PROB: 0.01
+    SCORE_THRESH_TEST: 0.05
+    SMOOTH_L1_LOSS_BETA: 0.1
+    TOPK_CANDIDATES_TEST: 1000
+  ROI_BOX_CASCADE_HEAD:
+    BBOX_REG_WEIGHTS:
+    - - 10.0
+      - 10.0
+      - 5.0
+      - 5.0
+    - - 20.0
+      - 20.0
+      - 10.0
+      - 10.0
+    - - 30.0
+      - 30.0
+      - 15.0
+      - 15.0
+    IOUS:
+    - 0.5
+    - 0.6
+    - 0.7
+  ROI_BOX_HEAD:
+    BBOX_REG_LOSS_TYPE: smooth_l1
+    BBOX_REG_LOSS_WEIGHT: 1.0
+    BBOX_REG_WEIGHTS:
+    - 10.0
+    - 10.0
+    - 5.0
+    - 5.0
+    CLS_AGNOSTIC_BBOX_REG: false
+    CONV_DIM: 256
+    FC_DIM: 1024
+    NAME: ''
+    NORM: ''
+    NUM_CONV: 0
+    NUM_FC: 0
+    POOLER_RESOLUTION: 14
+    POOLER_SAMPLING_RATIO: 0
+    POOLER_TYPE: ROIAlignV2
+    SMOOTH_L1_BETA: 0.0
+    TRAIN_ON_PRED_BOXES: false
+  ROI_HEADS:
+    BATCH_SIZE_PER_IMAGE: 128
+    IN_FEATURES:
+    - res4
+    IOU_LABELS:
+    - 0
+    - 1
+    IOU_THRESHOLDS:
+    - 0.5
+    NAME: FsodRes5ROIHeads
+    NMS_THRESH_TEST: 0.5
+    NUM_CLASSES: 1
+    POSITIVE_FRACTION: 0.5
+    PROPOSAL_APPEND_GT: true
+    SCORE_THRESH_TEST: 0.0
+  ROI_KEYPOINT_HEAD:
+    CONV_DIMS:
+    - 512
+    - 512
+    - 512
+    - 512
+    - 512
+    - 512
+    - 512
+    - 512
+    LOSS_WEIGHT: 1.0
+    MIN_KEYPOINTS_PER_IMAGE: 1
+    NAME: KRCNNConvDeconvUpsampleHead
+    NORMALIZE_LOSS_BY_VISIBLE_KEYPOINTS: true
+    NUM_KEYPOINTS: 17
+    POOLER_RESOLUTION: 14
+    POOLER_SAMPLING_RATIO: 0
+    POOLER_TYPE: ROIAlignV2
+  ROI_MASK_HEAD:
+    CLS_AGNOSTIC_MASK: false
+    CONV_DIM: 256
+    NAME: MaskRCNNConvUpsampleHead
+    NORM: ''
+    NUM_CONV: 0
+    POOLER_RESOLUTION: 14
+    POOLER_SAMPLING_RATIO: 0
+    POOLER_TYPE: ROIAlignV2
+  RPN:
+    BATCH_SIZE_PER_IMAGE: 256
+    BBOX_REG_LOSS_TYPE: smooth_l1
+    BBOX_REG_LOSS_WEIGHT: 1.0
+    BBOX_REG_WEIGHTS:
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    BOUNDARY_THRESH: -1
+    CONV_DIMS:
+    - -1
+    HEAD_NAME: StandardRPNHead
+    IN_FEATURES:
+    - res4
+    IOU_LABELS:
+    - 0
+    - -1
+    - 1
+    IOU_THRESHOLDS:
+    - 0.3
+    - 0.7
+    LOSS_WEIGHT: 1.0
+    NMS_THRESH: 0.7
+    POSITIVE_FRACTION: 0.5
+    POST_NMS_TOPK_TEST: 100
+    POST_NMS_TOPK_TRAIN: 2000
+    PRE_NMS_TOPK_TEST: 6000
+    PRE_NMS_TOPK_TRAIN: 12000
+    SMOOTH_L1_BETA: 0.0
+  SEM_SEG_HEAD:
+    COMMON_STRIDE: 4
+    CONVS_DIM: 128
+    IGNORE_VALUE: 255
+    IN_FEATURES:
+    - p2
+    - p3
+    - p4
+    - p5
+    LOSS_WEIGHT: 1.0
+    NAME: SemSegFPNHead
+    NORM: GN
+    NUM_CLASSES: 1
+  WEIGHTS: ./output/fsod/pre_train_model/model_final.pth
+OUTPUT_DIR: ./output/fsod/finetune_dir/R_50_C4_1x_5shot
+SEED: -1
+SOLVER:
+  AMP:
+    ENABLED: false
+  BASE_LR: 0.0001
+  BIAS_LR_FACTOR: 1.0
+  CHECKPOINT_PERIOD: 100
+  CLIP_GRADIENTS:
+    CLIP_TYPE: value
+    CLIP_VALUE: 1.0
+    ENABLED: false
+    NORM_TYPE: 2.0
+  GAMMA: 0.1
+  HEAD_LR_FACTOR: 2.0
+  IMS_PER_BATCH: 8
+  LR_SCHEDULER_NAME: WarmupMultiStepLR
+  MAX_ITER: 3000
+  MOMENTUM: 0.9
+  NESTEROV: false
+  REFERENCE_WORLD_SIZE: 0
+  STEPS:
+  - 2000
+  - 2900
+  WARMUP_FACTOR: 0.1
+  WARMUP_ITERS: 200
+  WARMUP_METHOD: linear
+  WEIGHT_DECAY: 0.0001
+  WEIGHT_DECAY_BIAS: 0.0001
+  WEIGHT_DECAY_NORM: 0.0
+TEST:
+  AUG:
+    ENABLED: false
+    FLIP: true
+    MAX_SIZE: 4000
+    MIN_SIZES:
+    - 400
+    - 500
+    - 600
+    - 700
+    - 800
+    - 900
+    - 1000
+    - 1100
+    - 1200
+  DETECTIONS_PER_IMAGE: 100
+  EVAL_PERIOD: 0
+  EXPECTED_RESULTS: []
+  KEYPOINT_OKS_SIGMAS: []
+  PRECISE_BN:
+    ENABLED: false
+    NUM_ITER: 200
+VERSION: 2
+VIS_PERIOD: 0
+
+[32m[02/01 20:48:20 detectron2]: [0mFull config saved to ./output/fsod/finetune_dir/R_50_C4_1x_5shot/config.yaml
+[32m[02/01 20:48:20 d2.utils.env]: [0mUsing a generated random seed 21667715
+[32m[02/01 20:48:24 d2.engine.defaults]: [0mModel:
+FsodRCNN(
+  (backbone): ResNet(
+    (stem): BasicStem(
+      (conv1): Conv2d(
+        3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False
+        (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+      )
+    )
+    (res2): Sequential(
+      (0): BottleneckBlock(
+        (shortcut): Conv2d(
+          64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+          (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+        )
+        (conv1): Conv2d(
+          64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False
+          (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+        )
+        (conv2): Conv2d(
+          64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+          (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+        )
+        (conv3): Conv2d(
+          64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+          (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+        )
+      )
+      (1): BottleneckBlock(
+        (conv1): Conv2d(
+          256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False
+          (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+        )
+        (conv2): Conv2d(
+          64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+          (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+        )
+        (conv3): Conv2d(
+          64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+          (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+        )
+      )
+      (2): BottleneckBlock(
+        (conv1): Conv2d(
+          256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False
+          (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+        )
+        (conv2): Conv2d(
+          64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+          (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+        )
+        (conv3): Conv2d(
+          64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+          (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+        )
+      )
+    )
+    (res3): Sequential(
+      (0): BottleneckBlock(
+        (shortcut): Conv2d(
+          256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False
+          (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+        )
+        (conv1): Conv2d(
+          256, 128, kernel_size=(1, 1), stride=(2, 2), bias=False
+          (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+        )
+        (conv2): Conv2d(
+          128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+          (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+        )
+        (conv3): Conv2d(
+          128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False
+          (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+        )
+      )
+      (1): BottleneckBlock(
+        (conv1): Conv2d(
+          512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False
+          (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+        )
+        (conv2): Conv2d(
+          128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+          (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+        )
+        (conv3): Conv2d(
+          128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False
+          (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+        )
+      )
+      (2): BottleneckBlock(
+        (conv1): Conv2d(
+          512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False
+          (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+        )
+        (conv2): Conv2d(
+          128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+          (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+        )
+        (conv3): Conv2d(
+          128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False
+          (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+        )
+      )
+      (3): BottleneckBlock(
+        (conv1): Conv2d(
+          512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False
+          (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+        )
+        (conv2): Conv2d(
+          128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+          (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+        )
+        (conv3): Conv2d(
+          128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False
+          (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+        )
+      )
+    )
+    (res4): Sequential(
+      (0): BottleneckBlock(
+        (shortcut): Conv2d(
+          512, 1024, kernel_size=(1, 1), stride=(2, 2), bias=False
+          (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+        )
+        (conv1): Conv2d(
+          512, 256, kernel_size=(1, 1), stride=(2, 2), bias=False
+          (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+        )
+        (conv2): Conv2d(
+          256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+          (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+        )
+        (conv3): Conv2d(
+          256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+          (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+        )
+      )
+      (1): BottleneckBlock(
+        (conv1): Conv2d(
+          1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+          (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+        )
+        (conv2): Conv2d(
+          256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+          (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+        )
+        (conv3): Conv2d(
+          256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+          (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+        )
+      )
+      (2): BottleneckBlock(
+        (conv1): Conv2d(
+          1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+          (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+        )
+        (conv2): Conv2d(
+          256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+          (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+        )
+        (conv3): Conv2d(
+          256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+          (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+        )
+      )
+      (3): BottleneckBlock(
+        (conv1): Conv2d(
+          1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+          (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+        )
+        (conv2): Conv2d(
+          256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+          (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+        )
+        (conv3): Conv2d(
+          256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+          (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+        )
+      )
+      (4): BottleneckBlock(
+        (conv1): Conv2d(
+          1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+          (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+        )
+        (conv2): Conv2d(
+          256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+          (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+        )
+        (conv3): Conv2d(
+          256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+          (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+        )
+      )
+      (5): BottleneckBlock(
+        (conv1): Conv2d(
+          1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+          (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+        )
+        (conv2): Conv2d(
+          256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+          (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+        )
+        (conv3): Conv2d(
+          256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+          (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+        )
+      )
+    )
+  )
+  (proposal_generator): FsodRPN(
+    (rpn_head): StandardRPNHead(
+      (conv): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (objectness_logits): Conv2d(1024, 15, kernel_size=(1, 1), stride=(1, 1))
+      (anchor_deltas): Conv2d(1024, 60, kernel_size=(1, 1), stride=(1, 1))
+    )
+    (anchor_generator): DefaultAnchorGenerator(
+      (cell_anchors): BufferList()
+    )
+  )
+  (roi_heads): FsodRes5ROIHeads(
+    (pooler): ROIPooler(
+      (level_poolers): ModuleList(
+        (0): ROIAlign(output_size=(14, 14), spatial_scale=0.0625, sampling_ratio=0, aligned=True)
+      )
+    )
+    (res5): Sequential(
+      (0): BottleneckBlock(
+        (shortcut): Conv2d(
+          1024, 2048, kernel_size=(1, 1), stride=(2, 2), bias=False
+          (norm): FrozenBatchNorm2d(num_features=2048, eps=1e-05)
+        )
+        (conv1): Conv2d(
+          1024, 512, kernel_size=(1, 1), stride=(2, 2), bias=False
+          (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+        )
+        (conv2): Conv2d(
+          512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+          (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+        )
+        (conv3): Conv2d(
+          512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False
+          (norm): FrozenBatchNorm2d(num_features=2048, eps=1e-05)
+        )
+      )
+      (1): BottleneckBlock(
+        (conv1): Conv2d(
+          2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False
+          (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+        )
+        (conv2): Conv2d(
+          512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+          (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+        )
+        (conv3): Conv2d(
+          512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False
+          (norm): FrozenBatchNorm2d(num_features=2048, eps=1e-05)
+        )
+      )
+      (2): BottleneckBlock(
+        (conv1): Conv2d(
+          2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False
+          (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+        )
+        (conv2): Conv2d(
+          512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+          (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+        )
+        (conv3): Conv2d(
+          512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False
+          (norm): FrozenBatchNorm2d(num_features=2048, eps=1e-05)
+        )
+      )
+    )
+    (box_predictor): FsodFastRCNNOutputLayers(
+      (conv_1): Conv2d(4096, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (conv_2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), bias=False)
+      (conv_3): Conv2d(512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bbox_pred_pr): Linear(in_features=2048, out_features=4, bias=True)
+      (cls_score_pr): Linear(in_features=2048, out_features=2, bias=True)
+      (conv_cor): Conv2d(2048, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (cls_score_cor): Linear(in_features=2048, out_features=2, bias=True)
+      (fc_1): Linear(in_features=4096, out_features=2048, bias=True)
+      (fc_2): Linear(in_features=2048, out_features=2048, bias=True)
+      (cls_score_fc): Linear(in_features=2048, out_features=2, bias=True)
+      (avgpool): AvgPool2d(kernel_size=3, stride=1, padding=0)
+      (avgpool_fc): AvgPool2d(kernel_size=7, stride=7, padding=0)
+    )
+  )
+  (channel_attention): ParallelPolarizedSelfAttention(
+    (ch_wv): Conv2d(1024, 512, kernel_size=(1, 1), stride=(1, 1))
+    (ch_wq): Conv2d(1024, 1, kernel_size=(1, 1), stride=(1, 1))
+    (softmax_channel): Softmax(dim=1)
+    (softmax_spatial): Softmax(dim=-1)
+    (ch_wz): Conv2d(512, 1024, kernel_size=(1, 1), stride=(1, 1))
+    (ln): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+    (sigmoid): Sigmoid()
+    (sp_wv): Conv2d(1024, 512, kernel_size=(1, 1), stride=(1, 1))
+    (sp_wq): Conv2d(1024, 512, kernel_size=(1, 1), stride=(1, 1))
+    (agp): AdaptiveAvgPool2d(output_size=(1, 1))
+  )
+  (agp): AdaptiveAvgPool2d(output_size=(14, 14))
+)
+[32m[02/01 20:48:25 d2.data.datasets.coco]: [0mLoaded 118287 images in COCO format from datasets/coco/new_annotations/final_split_voc_5_shot_instances_train2017.json
+[32m[02/01 20:48:26 d2.data.build]: [0mRemoved 118187 images with no usable annotations. 100 images left.
+[32m[02/01 20:48:26 d2.data.build]: [0mRemoved 0 images with no usable annotations. 100 images left.
+[32m[02/01 20:48:26 d2.data.build]: [0mDistribution of instances among all 80 categories:
+[36m|   category    | #instances   |   category   | #instances   |   category    | #instances   |
+|:-------------:|:-------------|:------------:|:-------------|:-------------:|:-------------|
+|    person     | 5            |   bicycle    | 5            |      car      | 5            |
+|  motorcycle   | 5            |   airplane   | 5            |      bus      | 5            |
+|     train     | 5            |    truck     | 0            |     boat      | 5            |
+| traffic light | 0            | fire hydrant | 0            |   stop sign   | 0            |
+| parking meter | 0            |    bench     | 0            |     bird      | 5            |
+|      cat      | 5            |     dog      | 5            |     horse     | 5            |
+|     sheep     | 5            |     cow      | 5            |   elephant    | 0            |
+|     bear      | 0            |    zebra     | 0            |    giraffe    | 0            |
+|   backpack    | 0            |   umbrella   | 0            |    handbag    | 0            |
+|      tie      | 0            |   suitcase   | 0            |    frisbee    | 0            |
+|     skis      | 0            |  snowboard   | 0            |  sports ball  | 0            |
+|     kite      | 0            | baseball bat | 0            | baseball gl.. | 0            |
+|  skateboard   | 0            |  surfboard   | 0            | tennis racket | 0            |
+|    bottle     | 5            |  wine glass  | 0            |      cup      | 0            |
+|     fork      | 0            |    knife     | 0            |     spoon     | 0            |
+|     bowl      | 0            |    banana    | 0            |     apple     | 0            |
+|   sandwich    | 0            |    orange    | 0            |   broccoli    | 0            |
+|    carrot     | 0            |   hot dog    | 0            |     pizza     | 0            |
+|     donut     | 0            |     cake     | 0            |     chair     | 5            |
+|     couch     | 5            | potted plant | 5            |      bed      | 0            |
+| dining table  | 5            |    toilet    | 0            |      tv       | 5            |
+|    laptop     | 0            |    mouse     | 0            |    remote     | 0            |
+|   keyboard    | 0            |  cell phone  | 0            |   microwave   | 0            |
+|     oven      | 0            |   toaster    | 0            |     sink      | 0            |
+| refrigerator  | 0            |     book     | 0            |     clock     | 0            |
+|     vase      | 0            |   scissors   | 0            |  teddy bear   | 0            |
+|  hair drier   | 0            |  toothbrush  | 0            |               |              |
+|     total     | 100          |              |              |               |              |[0m
+[32m[02/01 20:48:26 d2.data.common]: [0mSerializing 100 elements to byte tensors and concatenating them all ...
+[32m[02/01 20:48:26 d2.data.common]: [0mSerialized dataset takes 0.02 MiB
+[32m[02/01 20:48:26 fewx.data.build]: [0mUsing training sampler TrainingSampler
+[32m[02/01 20:48:26 fvcore.common.checkpoint]: [0m[Checkpointer] Loading from ./output/fsod/pre_train_model/model_final.pth ...
+[5m[31mWARNING[0m [32m[02/01 20:48:26 fvcore.common.checkpoint]: [0mSome model parameters or buffers are not found in the checkpoint:
+[34mchannel_attention.ch_wq.{bias, weight}[0m
+[34mchannel_attention.ch_wv.{bias, weight}[0m
+[34mchannel_attention.ch_wz.{bias, weight}[0m
+[34mchannel_attention.ln.{bias, weight}[0m
+[34mchannel_attention.sp_wq.{bias, weight}[0m
+[34mchannel_attention.sp_wv.{bias, weight}[0m
+[5m[31mWARNING[0m [32m[02/01 20:48:26 fvcore.common.checkpoint]: [0mThe checkpoint state_dict contains keys that are not used by the model:
+  [35mproposal_generator.anchor_generator.cell_anchors.0[0m
+[32m[02/01 20:48:26 d2.engine.train_loop]: [0mStarting training from iteration 0
+[32m[02/01 20:48:53 d2.utils.events]: [0m eta: 1:04:38  iter: 19  total_loss: 0.264  loss_cls: 0.05378  loss_box_reg: 0.06882  loss_rpn_cls: 0.1162  loss_rpn_loc: 0.01857  time: 1.3106  data_time: 0.0670  lr: 1.855e-05  max_mem: 5176M
+[32m[02/01 20:49:20 d2.utils.events]: [0m eta: 1:05:27  iter: 39  total_loss: 0.2651  loss_cls: 0.06425  loss_box_reg: 0.0668  loss_rpn_cls: 0.106  loss_rpn_loc: 0.01987  time: 1.3258  data_time: 0.0442  lr: 2.755e-05  max_mem: 5179M
+[32m[02/01 20:49:46 d2.utils.events]: [0m eta: 1:04:35  iter: 59  total_loss: 0.2516  loss_cls: 0.05642  loss_box_reg: 0.0692  loss_rpn_cls: 0.1088  loss_rpn_loc: 0.01647  time: 1.3168  data_time: 0.0411  lr: 3.655e-05  max_mem: 5179M
+[32m[02/01 20:50:13 d2.utils.events]: [0m eta: 1:04:17  iter: 79  total_loss: 0.2452  loss_cls: 0.04962  loss_box_reg: 0.06479  loss_rpn_cls: 0.09949  loss_rpn_loc: 0.01869  time: 1.3260  data_time: 0.0451  lr: 4.555e-05  max_mem: 5179M
+[32m[02/01 20:50:40 fvcore.common.checkpoint]: [0mSaving checkpoint to ./output/fsod/finetune_dir/R_50_C4_1x_5shot/model_0000099.pth
+[32m[02/01 20:50:41 d2.utils.events]: [0m eta: 1:03:51  iter: 99  total_loss: 0.2437  loss_cls: 0.05201  loss_box_reg: 0.06827  loss_rpn_cls: 0.09489  loss_rpn_loc: 0.0175  time: 1.3295  data_time: 0.0471  lr: 5.455e-05  max_mem: 5179M
+[32m[02/01 20:51:08 d2.utils.events]: [0m eta: 1:03:25  iter: 119  total_loss: 0.2338  loss_cls: 0.05376  loss_box_reg: 0.06825  loss_rpn_cls: 0.08594  loss_rpn_loc: 0.01333  time: 1.3317  data_time: 0.0406  lr: 6.355e-05  max_mem: 5179M
+[32m[02/01 20:51:35 d2.utils.events]: [0m eta: 1:03:23  iter: 139  total_loss: 0.2182  loss_cls: 0.05205  loss_box_reg: 0.07037  loss_rpn_cls: 0.08224  loss_rpn_loc: 0.01794  time: 1.3341  data_time: 0.0462  lr: 7.255e-05  max_mem: 5179M
+[32m[02/01 20:52:01 d2.utils.events]: [0m eta: 1:02:49  iter: 159  total_loss: 0.2244  loss_cls: 0.05593  loss_box_reg: 0.06622  loss_rpn_cls: 0.07625  loss_rpn_loc: 0.01663  time: 1.3323  data_time: 0.0404  lr: 8.155e-05  max_mem: 5179M
+[32m[02/01 20:52:28 d2.utils.events]: [0m eta: 1:02:34  iter: 179  total_loss: 0.2065  loss_cls: 0.04757  loss_box_reg: 0.06541  loss_rpn_cls: 0.06542  loss_rpn_loc: 0.01586  time: 1.3355  data_time: 0.0509  lr: 9.055e-05  max_mem: 5179M
+[32m[02/01 20:52:55 fvcore.common.checkpoint]: [0mSaving checkpoint to ./output/fsod/finetune_dir/R_50_C4_1x_5shot/model_0000199.pth
+[32m[02/01 20:52:56 d2.utils.events]: [0m eta: 1:02:12  iter: 199  total_loss: 0.194  loss_cls: 0.04679  loss_box_reg: 0.06407  loss_rpn_cls: 0.06209  loss_rpn_loc: 0.01652  time: 1.3374  data_time: 0.0480  lr: 9.955e-05  max_mem: 5179M
+[32m[02/01 20:53:23 d2.utils.events]: [0m eta: 1:01:45  iter: 219  total_loss: 0.2027  loss_cls: 0.04775  loss_box_reg: 0.06675  loss_rpn_cls: 0.06307  loss_rpn_loc: 0.01516  time: 1.3365  data_time: 0.0417  lr: 0.0001  max_mem: 5179M
+[32m[02/01 20:53:50 d2.utils.events]: [0m eta: 1:01:25  iter: 239  total_loss: 0.19  loss_cls: 0.05859  loss_box_reg: 0.06462  loss_rpn_cls: 0.05719  loss_rpn_loc: 0.01536  time: 1.3393  data_time: 0.0523  lr: 0.0001  max_mem: 5179M
+[32m[02/01 20:54:17 d2.utils.events]: [0m eta: 1:00:59  iter: 259  total_loss: 0.1839  loss_cls: 0.04712  loss_box_reg: 0.06478  loss_rpn_cls: 0.05636  loss_rpn_loc: 0.0169  time: 1.3392  data_time: 0.0453  lr: 0.0001  max_mem: 5179M
+[32m[02/01 20:54:44 d2.utils.events]: [0m eta: 1:00:41  iter: 279  total_loss: 0.1993  loss_cls: 0.04549  loss_box_reg: 0.06148  loss_rpn_cls: 0.05615  loss_rpn_loc: 0.01699  time: 1.3411  data_time: 0.0473  lr: 0.0001  max_mem: 5179M
+[32m[02/01 20:55:12 fvcore.common.checkpoint]: [0mSaving checkpoint to ./output/fsod/finetune_dir/R_50_C4_1x_5shot/model_0000299.pth
+[32m[02/01 20:55:12 d2.utils.events]: [0m eta: 1:00:17  iter: 299  total_loss: 0.1846  loss_cls: 0.04457  loss_box_reg: 0.06317  loss_rpn_cls: 0.05453  loss_rpn_loc: 0.01217  time: 1.3421  data_time: 0.0473  lr: 0.0001  max_mem: 5179M
+[32m[02/01 20:55:39 d2.utils.events]: [0m eta: 0:59:48  iter: 319  total_loss: 0.1862  loss_cls: 0.04678  loss_box_reg: 0.06422  loss_rpn_cls: 0.05734  loss_rpn_loc: 0.01785  time: 1.3410  data_time: 0.0448  lr: 0.0001  max_mem: 5179M
+[32m[02/01 20:56:05 d2.utils.events]: [0m eta: 0:59:19  iter: 339  total_loss: 0.1739  loss_cls: 0.04812  loss_box_reg: 0.06176  loss_rpn_cls: 0.05039  loss_rpn_loc: 0.01333  time: 1.3399  data_time: 0.0432  lr: 0.0001  max_mem: 5179M
+[32m[02/01 20:56:31 d2.utils.events]: [0m eta: 0:58:43  iter: 359  total_loss: 0.1856  loss_cls: 0.0399  loss_box_reg: 0.06548  loss_rpn_cls: 0.05414  loss_rpn_loc: 0.01429  time: 1.3371  data_time: 0.0357  lr: 0.0001  max_mem: 5179M
+[32m[02/01 20:56:58 d2.utils.events]: [0m eta: 0:58:21  iter: 379  total_loss: 0.1781  loss_cls: 0.04261  loss_box_reg: 0.06433  loss_rpn_cls: 0.04695  loss_rpn_loc: 0.01512  time: 1.3384  data_time: 0.0447  lr: 0.0001  max_mem: 5179M
+[32m[02/01 20:57:26 fvcore.common.checkpoint]: [0mSaving checkpoint to ./output/fsod/finetune_dir/R_50_C4_1x_5shot/model_0000399.pth
+[32m[02/01 20:57:26 d2.utils.events]: [0m eta: 0:57:57  iter: 399  total_loss: 0.1719  loss_cls: 0.03949  loss_box_reg: 0.06656  loss_rpn_cls: 0.04424  loss_rpn_loc: 0.01473  time: 1.3397  data_time: 0.0487  lr: 0.0001  max_mem: 5179M
+[32m[02/01 20:57:53 d2.utils.events]: [0m eta: 0:57:33  iter: 419  total_loss: 0.1714  loss_cls: 0.03877  loss_box_reg: 0.06495  loss_rpn_cls: 0.04049  loss_rpn_loc: 0.01345  time: 1.3397  data_time: 0.0409  lr: 0.0001  max_mem: 5179M
+[32m[02/01 20:58:20 d2.utils.events]: [0m eta: 0:57:08  iter: 439  total_loss: 0.2058  loss_cls: 0.04732  loss_box_reg: 0.06392  loss_rpn_cls: 0.06163  loss_rpn_loc: 0.0155  time: 1.3404  data_time: 0.0441  lr: 0.0001  max_mem: 5179M
+[32m[02/01 20:58:47 d2.utils.events]: [0m eta: 0:56:40  iter: 459  total_loss: 0.1772  loss_cls: 0.04286  loss_box_reg: 0.06076  loss_rpn_cls: 0.0513  loss_rpn_loc: 0.01358  time: 1.3403  data_time: 0.0465  lr: 0.0001  max_mem: 5179M
+[32m[02/01 20:59:14 d2.utils.events]: [0m eta: 0:56:15  iter: 479  total_loss: 0.1601  loss_cls: 0.04433  loss_box_reg: 0.06337  loss_rpn_cls: 0.04559  loss_rpn_loc: 0.01252  time: 1.3409  data_time: 0.0457  lr: 0.0001  max_mem: 5179M
+[32m[02/01 20:59:42 fvcore.common.checkpoint]: [0mSaving checkpoint to ./output/fsod/finetune_dir/R_50_C4_1x_5shot/model_0000499.pth
+[32m[02/01 20:59:42 d2.utils.events]: [0m eta: 0:55:49  iter: 499  total_loss: 0.1665  loss_cls: 0.04517  loss_box_reg: 0.06359  loss_rpn_cls: 0.04903  loss_rpn_loc: 0.01294  time: 1.3416  data_time: 0.0437  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:00:09 d2.utils.events]: [0m eta: 0:55:22  iter: 519  total_loss: 0.1658  loss_cls: 0.04574  loss_box_reg: 0.06549  loss_rpn_cls: 0.04567  loss_rpn_loc: 0.01223  time: 1.3412  data_time: 0.0377  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:00:36 d2.utils.events]: [0m eta: 0:54:56  iter: 539  total_loss: 0.1654  loss_cls: 0.04118  loss_box_reg: 0.06233  loss_rpn_cls: 0.04928  loss_rpn_loc: 0.0149  time: 1.3414  data_time: 0.0395  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:01:03 d2.utils.events]: [0m eta: 0:54:29  iter: 559  total_loss: 0.1796  loss_cls: 0.04398  loss_box_reg: 0.06466  loss_rpn_cls: 0.04521  loss_rpn_loc: 0.01454  time: 1.3416  data_time: 0.0450  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:01:30 d2.utils.events]: [0m eta: 0:54:02  iter: 579  total_loss: 0.1702  loss_cls: 0.03882  loss_box_reg: 0.06458  loss_rpn_cls: 0.04604  loss_rpn_loc: 0.013  time: 1.3416  data_time: 0.0453  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:01:57 fvcore.common.checkpoint]: [0mSaving checkpoint to ./output/fsod/finetune_dir/R_50_C4_1x_5shot/model_0000599.pth
+[32m[02/01 21:01:58 d2.utils.events]: [0m eta: 0:53:36  iter: 599  total_loss: 0.1793  loss_cls: 0.04074  loss_box_reg: 0.06513  loss_rpn_cls: 0.05  loss_rpn_loc: 0.0148  time: 1.3424  data_time: 0.0492  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:02:25 d2.utils.events]: [0m eta: 0:53:10  iter: 619  total_loss: 0.17  loss_cls: 0.04115  loss_box_reg: 0.0602  loss_rpn_cls: 0.053  loss_rpn_loc: 0.01421  time: 1.3425  data_time: 0.0443  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:02:53 d2.utils.events]: [0m eta: 0:52:45  iter: 639  total_loss: 0.1723  loss_cls: 0.04117  loss_box_reg: 0.06178  loss_rpn_cls: 0.05291  loss_rpn_loc: 0.01436  time: 1.3439  data_time: 0.0467  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:03:20 d2.utils.events]: [0m eta: 0:52:19  iter: 659  total_loss: 0.1657  loss_cls: 0.03215  loss_box_reg: 0.06403  loss_rpn_cls: 0.04971  loss_rpn_loc: 0.01523  time: 1.3442  data_time: 0.0435  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:03:46 d2.utils.events]: [0m eta: 0:51:52  iter: 679  total_loss: 0.1638  loss_cls: 0.04001  loss_box_reg: 0.06416  loss_rpn_cls: 0.03697  loss_rpn_loc: 0.0105  time: 1.3440  data_time: 0.0422  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:04:14 fvcore.common.checkpoint]: [0mSaving checkpoint to ./output/fsod/finetune_dir/R_50_C4_1x_5shot/model_0000699.pth
+[32m[02/01 21:04:14 d2.utils.events]: [0m eta: 0:51:25  iter: 699  total_loss: 0.1717  loss_cls: 0.04032  loss_box_reg: 0.06615  loss_rpn_cls: 0.04737  loss_rpn_loc: 0.01469  time: 1.3445  data_time: 0.0496  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:04:41 d2.utils.events]: [0m eta: 0:50:59  iter: 719  total_loss: 0.1692  loss_cls: 0.0411  loss_box_reg: 0.06432  loss_rpn_cls: 0.046  loss_rpn_loc: 0.0128  time: 1.3445  data_time: 0.0455  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:05:08 d2.utils.events]: [0m eta: 0:50:32  iter: 739  total_loss: 0.1552  loss_cls: 0.03886  loss_box_reg: 0.06334  loss_rpn_cls: 0.03997  loss_rpn_loc: 0.01438  time: 1.3445  data_time: 0.0468  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:05:35 d2.utils.events]: [0m eta: 0:50:05  iter: 759  total_loss: 0.1553  loss_cls: 0.0356  loss_box_reg: 0.06161  loss_rpn_cls: 0.04644  loss_rpn_loc: 0.01271  time: 1.3444  data_time: 0.0439  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:06:02 d2.utils.events]: [0m eta: 0:49:38  iter: 779  total_loss: 0.1636  loss_cls: 0.03937  loss_box_reg: 0.0621  loss_rpn_cls: 0.04662  loss_rpn_loc: 0.0133  time: 1.3441  data_time: 0.0425  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:06:29 fvcore.common.checkpoint]: [0mSaving checkpoint to ./output/fsod/finetune_dir/R_50_C4_1x_5shot/model_0000799.pth
+[32m[02/01 21:06:29 d2.utils.events]: [0m eta: 0:49:12  iter: 799  total_loss: 0.1602  loss_cls: 0.03888  loss_box_reg: 0.06403  loss_rpn_cls: 0.04094  loss_rpn_loc: 0.0126  time: 1.3442  data_time: 0.0398  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:06:57 d2.utils.events]: [0m eta: 0:48:45  iter: 819  total_loss: 0.1533  loss_cls: 0.03682  loss_box_reg: 0.06077  loss_rpn_cls: 0.04214  loss_rpn_loc: 0.01387  time: 1.3445  data_time: 0.0458  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:07:24 d2.utils.events]: [0m eta: 0:48:18  iter: 839  total_loss: 0.1519  loss_cls: 0.03876  loss_box_reg: 0.06711  loss_rpn_cls: 0.03927  loss_rpn_loc: 0.01136  time: 1.3444  data_time: 0.0473  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:07:51 d2.utils.events]: [0m eta: 0:47:52  iter: 859  total_loss: 0.1687  loss_cls: 0.04261  loss_box_reg: 0.06141  loss_rpn_cls: 0.04903  loss_rpn_loc: 0.01459  time: 1.3448  data_time: 0.0452  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:08:17 d2.utils.events]: [0m eta: 0:47:24  iter: 879  total_loss: 0.1548  loss_cls: 0.03843  loss_box_reg: 0.06195  loss_rpn_cls: 0.05081  loss_rpn_loc: 0.01367  time: 1.3442  data_time: 0.0409  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:08:44 fvcore.common.checkpoint]: [0mSaving checkpoint to ./output/fsod/finetune_dir/R_50_C4_1x_5shot/model_0000899.pth
+[32m[02/01 21:08:44 d2.utils.events]: [0m eta: 0:46:57  iter: 899  total_loss: 0.1621  loss_cls: 0.03667  loss_box_reg: 0.06381  loss_rpn_cls: 0.04612  loss_rpn_loc: 0.01473  time: 1.3439  data_time: 0.0567  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:09:10 d2.utils.events]: [0m eta: 0:46:27  iter: 919  total_loss: 0.1646  loss_cls: 0.03844  loss_box_reg: 0.06406  loss_rpn_cls: 0.04688  loss_rpn_loc: 0.01279  time: 1.3427  data_time: 0.0368  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:09:37 d2.utils.events]: [0m eta: 0:46:01  iter: 939  total_loss: 0.1656  loss_cls: 0.04055  loss_box_reg: 0.06284  loss_rpn_cls: 0.04334  loss_rpn_loc: 0.01376  time: 1.3427  data_time: 0.0454  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:10:04 d2.utils.events]: [0m eta: 0:45:34  iter: 959  total_loss: 0.1492  loss_cls: 0.03714  loss_box_reg: 0.06043  loss_rpn_cls: 0.03837  loss_rpn_loc: 0.0139  time: 1.3428  data_time: 0.0464  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:10:31 d2.utils.events]: [0m eta: 0:45:07  iter: 979  total_loss: 0.1583  loss_cls: 0.03426  loss_box_reg: 0.06407  loss_rpn_cls: 0.04693  loss_rpn_loc: 0.01186  time: 1.3426  data_time: 0.0435  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:10:58 fvcore.common.checkpoint]: [0mSaving checkpoint to ./output/fsod/finetune_dir/R_50_C4_1x_5shot/model_0000999.pth
+[32m[02/01 21:10:59 d2.utils.events]: [0m eta: 0:44:40  iter: 999  total_loss: 0.1549  loss_cls: 0.03702  loss_box_reg: 0.06074  loss_rpn_cls: 0.04515  loss_rpn_loc: 0.01293  time: 1.3428  data_time: 0.0429  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:11:26 d2.utils.events]: [0m eta: 0:44:14  iter: 1019  total_loss: 0.1618  loss_cls: 0.0395  loss_box_reg: 0.06185  loss_rpn_cls: 0.04586  loss_rpn_loc: 0.01376  time: 1.3430  data_time: 0.0480  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:11:53 d2.utils.events]: [0m eta: 0:43:48  iter: 1039  total_loss: 0.1614  loss_cls: 0.04012  loss_box_reg: 0.06088  loss_rpn_cls: 0.0387  loss_rpn_loc: 0.01114  time: 1.3430  data_time: 0.0494  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:12:20 d2.utils.events]: [0m eta: 0:43:23  iter: 1059  total_loss: 0.1581  loss_cls: 0.03678  loss_box_reg: 0.06206  loss_rpn_cls: 0.04543  loss_rpn_loc: 0.01531  time: 1.3432  data_time: 0.0440  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:12:46 d2.utils.events]: [0m eta: 0:42:55  iter: 1079  total_loss: 0.1573  loss_cls: 0.03718  loss_box_reg: 0.06066  loss_rpn_cls: 0.04498  loss_rpn_loc: 0.01131  time: 1.3429  data_time: 0.0457  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:13:13 fvcore.common.checkpoint]: [0mSaving checkpoint to ./output/fsod/finetune_dir/R_50_C4_1x_5shot/model_0001099.pth
+[32m[02/01 21:13:14 d2.utils.events]: [0m eta: 0:42:29  iter: 1099  total_loss: 0.1463  loss_cls: 0.03205  loss_box_reg: 0.06227  loss_rpn_cls: 0.0407  loss_rpn_loc: 0.01094  time: 1.3430  data_time: 0.0439  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:13:41 d2.utils.events]: [0m eta: 0:42:02  iter: 1119  total_loss: 0.1625  loss_cls: 0.03883  loss_box_reg: 0.0601  loss_rpn_cls: 0.0407  loss_rpn_loc: 0.0132  time: 1.3431  data_time: 0.0408  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:14:08 d2.utils.events]: [0m eta: 0:41:35  iter: 1139  total_loss: 0.1615  loss_cls: 0.03504  loss_box_reg: 0.06183  loss_rpn_cls: 0.04574  loss_rpn_loc: 0.01244  time: 1.3428  data_time: 0.0444  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:14:35 d2.utils.events]: [0m eta: 0:41:09  iter: 1159  total_loss: 0.1541  loss_cls: 0.03812  loss_box_reg: 0.06154  loss_rpn_cls: 0.04527  loss_rpn_loc: 0.01407  time: 1.3432  data_time: 0.0545  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:15:02 d2.utils.events]: [0m eta: 0:40:42  iter: 1179  total_loss: 0.1579  loss_cls: 0.0339  loss_box_reg: 0.06144  loss_rpn_cls: 0.04183  loss_rpn_loc: 0.01136  time: 1.3432  data_time: 0.0464  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:15:29 fvcore.common.checkpoint]: [0mSaving checkpoint to ./output/fsod/finetune_dir/R_50_C4_1x_5shot/model_0001199.pth
+[32m[02/01 21:15:29 d2.utils.events]: [0m eta: 0:40:14  iter: 1199  total_loss: 0.1584  loss_cls: 0.03882  loss_box_reg: 0.0571  loss_rpn_cls: 0.04024  loss_rpn_loc: 0.01071  time: 1.3432  data_time: 0.0444  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:15:57 d2.utils.events]: [0m eta: 0:39:47  iter: 1219  total_loss: 0.1647  loss_cls: 0.04082  loss_box_reg: 0.06059  loss_rpn_cls: 0.04918  loss_rpn_loc: 0.01477  time: 1.3433  data_time: 0.0401  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:16:23 d2.utils.events]: [0m eta: 0:39:19  iter: 1239  total_loss: 0.1725  loss_cls: 0.04258  loss_box_reg: 0.06643  loss_rpn_cls: 0.04661  loss_rpn_loc: 0.01333  time: 1.3430  data_time: 0.0413  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:16:50 d2.utils.events]: [0m eta: 0:38:53  iter: 1259  total_loss: 0.1465  loss_cls: 0.03702  loss_box_reg: 0.05969  loss_rpn_cls: 0.04538  loss_rpn_loc: 0.01236  time: 1.3431  data_time: 0.0479  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:17:17 d2.utils.events]: [0m eta: 0:38:26  iter: 1279  total_loss: 0.1573  loss_cls: 0.03512  loss_box_reg: 0.06196  loss_rpn_cls: 0.05099  loss_rpn_loc: 0.01316  time: 1.3433  data_time: 0.0425  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:17:44 fvcore.common.checkpoint]: [0mSaving checkpoint to ./output/fsod/finetune_dir/R_50_C4_1x_5shot/model_0001299.pth
+[32m[02/01 21:17:45 d2.utils.events]: [0m eta: 0:37:59  iter: 1299  total_loss: 0.1476  loss_cls: 0.03333  loss_box_reg: 0.061  loss_rpn_cls: 0.03953  loss_rpn_loc: 0.0126  time: 1.3431  data_time: 0.0422  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:18:12 d2.utils.events]: [0m eta: 0:37:33  iter: 1319  total_loss: 0.1617  loss_cls: 0.03811  loss_box_reg: 0.06685  loss_rpn_cls: 0.04184  loss_rpn_loc: 0.01365  time: 1.3432  data_time: 0.0456  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:18:38 d2.utils.events]: [0m eta: 0:37:05  iter: 1339  total_loss: 0.1555  loss_cls: 0.03735  loss_box_reg: 0.06273  loss_rpn_cls: 0.04189  loss_rpn_loc: 0.01089  time: 1.3429  data_time: 0.0408  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:19:05 d2.utils.events]: [0m eta: 0:36:39  iter: 1359  total_loss: 0.1459  loss_cls: 0.03457  loss_box_reg: 0.06274  loss_rpn_cls: 0.0383  loss_rpn_loc: 0.01162  time: 1.3430  data_time: 0.0439  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:19:32 d2.utils.events]: [0m eta: 0:36:13  iter: 1379  total_loss: 0.1516  loss_cls: 0.03492  loss_box_reg: 0.062  loss_rpn_cls: 0.03795  loss_rpn_loc: 0.01123  time: 1.3431  data_time: 0.0456  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:19:59 fvcore.common.checkpoint]: [0mSaving checkpoint to ./output/fsod/finetune_dir/R_50_C4_1x_5shot/model_0001399.pth
+[32m[02/01 21:19:59 d2.utils.events]: [0m eta: 0:35:46  iter: 1399  total_loss: 0.1537  loss_cls: 0.0317  loss_box_reg: 0.06246  loss_rpn_cls: 0.03833  loss_rpn_loc: 0.01325  time: 1.3428  data_time: 0.0410  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:20:27 d2.utils.events]: [0m eta: 0:35:19  iter: 1419  total_loss: 0.1518  loss_cls: 0.04053  loss_box_reg: 0.0606  loss_rpn_cls: 0.03824  loss_rpn_loc: 0.01201  time: 1.3430  data_time: 0.0444  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:20:54 d2.utils.events]: [0m eta: 0:34:52  iter: 1439  total_loss: 0.1458  loss_cls: 0.03763  loss_box_reg: 0.06243  loss_rpn_cls: 0.0382  loss_rpn_loc: 0.01175  time: 1.3431  data_time: 0.0458  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:21:20 d2.utils.events]: [0m eta: 0:34:25  iter: 1459  total_loss: 0.1581  loss_cls: 0.03659  loss_box_reg: 0.06122  loss_rpn_cls: 0.04568  loss_rpn_loc: 0.01284  time: 1.3429  data_time: 0.0475  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:21:46 d2.utils.events]: [0m eta: 0:33:57  iter: 1479  total_loss: 0.16  loss_cls: 0.03904  loss_box_reg: 0.06304  loss_rpn_cls: 0.04098  loss_rpn_loc: 0.01381  time: 1.3422  data_time: 0.0389  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:22:13 fvcore.common.checkpoint]: [0mSaving checkpoint to ./output/fsod/finetune_dir/R_50_C4_1x_5shot/model_0001499.pth
+[32m[02/01 21:22:13 d2.utils.events]: [0m eta: 0:33:30  iter: 1499  total_loss: 0.1573  loss_cls: 0.03706  loss_box_reg: 0.06074  loss_rpn_cls: 0.04053  loss_rpn_loc: 0.01355  time: 1.3420  data_time: 0.0415  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:22:41 d2.utils.events]: [0m eta: 0:33:03  iter: 1519  total_loss: 0.1588  loss_cls: 0.03552  loss_box_reg: 0.05996  loss_rpn_cls: 0.03684  loss_rpn_loc: 0.01409  time: 1.3422  data_time: 0.0492  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:23:07 d2.utils.events]: [0m eta: 0:32:36  iter: 1539  total_loss: 0.1499  loss_cls: 0.03344  loss_box_reg: 0.06178  loss_rpn_cls: 0.0412  loss_rpn_loc: 0.009833  time: 1.3419  data_time: 0.0425  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:23:34 d2.utils.events]: [0m eta: 0:32:10  iter: 1559  total_loss: 0.1625  loss_cls: 0.04092  loss_box_reg: 0.06196  loss_rpn_cls: 0.04096  loss_rpn_loc: 0.01213  time: 1.3420  data_time: 0.0454  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:24:01 d2.utils.events]: [0m eta: 0:31:43  iter: 1579  total_loss: 0.15  loss_cls: 0.03551  loss_box_reg: 0.05828  loss_rpn_cls: 0.0345  loss_rpn_loc: 0.01223  time: 1.3421  data_time: 0.0499  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:24:28 fvcore.common.checkpoint]: [0mSaving checkpoint to ./output/fsod/finetune_dir/R_50_C4_1x_5shot/model_0001599.pth
+[32m[02/01 21:24:29 d2.utils.events]: [0m eta: 0:31:15  iter: 1599  total_loss: 0.1484  loss_cls: 0.03978  loss_box_reg: 0.05928  loss_rpn_cls: 0.03634  loss_rpn_loc: 0.01173  time: 1.3421  data_time: 0.0444  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:24:56 d2.utils.events]: [0m eta: 0:30:49  iter: 1619  total_loss: 0.1677  loss_cls: 0.0353  loss_box_reg: 0.05991  loss_rpn_cls: 0.05532  loss_rpn_loc: 0.01409  time: 1.3422  data_time: 0.0430  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:25:23 d2.utils.events]: [0m eta: 0:30:22  iter: 1639  total_loss: 0.1422  loss_cls: 0.02887  loss_box_reg: 0.0603  loss_rpn_cls: 0.03873  loss_rpn_loc: 0.01239  time: 1.3422  data_time: 0.0473  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:25:50 d2.utils.events]: [0m eta: 0:29:55  iter: 1659  total_loss: 0.1511  loss_cls: 0.03823  loss_box_reg: 0.05873  loss_rpn_cls: 0.03971  loss_rpn_loc: 0.01075  time: 1.3422  data_time: 0.0439  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:26:17 d2.utils.events]: [0m eta: 0:29:28  iter: 1679  total_loss: 0.1445  loss_cls: 0.02937  loss_box_reg: 0.05915  loss_rpn_cls: 0.04185  loss_rpn_loc: 0.01185  time: 1.3423  data_time: 0.0489  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:26:43 fvcore.common.checkpoint]: [0mSaving checkpoint to ./output/fsod/finetune_dir/R_50_C4_1x_5shot/model_0001699.pth
+[32m[02/01 21:26:44 d2.utils.events]: [0m eta: 0:29:01  iter: 1699  total_loss: 0.1614  loss_cls: 0.04174  loss_box_reg: 0.06101  loss_rpn_cls: 0.04324  loss_rpn_loc: 0.01377  time: 1.3422  data_time: 0.0428  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:27:11 d2.utils.events]: [0m eta: 0:28:34  iter: 1719  total_loss: 0.1558  loss_cls: 0.03373  loss_box_reg: 0.06185  loss_rpn_cls: 0.0461  loss_rpn_loc: 0.0138  time: 1.3424  data_time: 0.0448  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:27:38 d2.utils.events]: [0m eta: 0:28:08  iter: 1739  total_loss: 0.1544  loss_cls: 0.04102  loss_box_reg: 0.05942  loss_rpn_cls: 0.03814  loss_rpn_loc: 0.01105  time: 1.3424  data_time: 0.0453  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:28:05 d2.utils.events]: [0m eta: 0:27:41  iter: 1759  total_loss: 0.1451  loss_cls: 0.03279  loss_box_reg: 0.0614  loss_rpn_cls: 0.04237  loss_rpn_loc: 0.0123  time: 1.3423  data_time: 0.0431  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:28:32 d2.utils.events]: [0m eta: 0:27:14  iter: 1779  total_loss: 0.1608  loss_cls: 0.03747  loss_box_reg: 0.06014  loss_rpn_cls: 0.04198  loss_rpn_loc: 0.01099  time: 1.3423  data_time: 0.0437  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:28:58 fvcore.common.checkpoint]: [0mSaving checkpoint to ./output/fsod/finetune_dir/R_50_C4_1x_5shot/model_0001799.pth
+[32m[02/01 21:28:59 d2.utils.events]: [0m eta: 0:26:47  iter: 1799  total_loss: 0.1563  loss_cls: 0.03447  loss_box_reg: 0.06196  loss_rpn_cls: 0.0396  loss_rpn_loc: 0.01413  time: 1.3421  data_time: 0.0415  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:29:26 d2.utils.events]: [0m eta: 0:26:20  iter: 1819  total_loss: 0.1544  loss_cls: 0.03868  loss_box_reg: 0.0636  loss_rpn_cls: 0.04173  loss_rpn_loc: 0.01241  time: 1.3420  data_time: 0.0427  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:29:53 d2.utils.events]: [0m eta: 0:25:53  iter: 1839  total_loss: 0.1532  loss_cls: 0.03183  loss_box_reg: 0.06214  loss_rpn_cls: 0.04404  loss_rpn_loc: 0.01376  time: 1.3422  data_time: 0.0489  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:30:20 d2.utils.events]: [0m eta: 0:25:25  iter: 1859  total_loss: 0.1474  loss_cls: 0.03828  loss_box_reg: 0.0609  loss_rpn_cls: 0.04018  loss_rpn_loc: 0.01174  time: 1.3422  data_time: 0.0485  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:30:47 d2.utils.events]: [0m eta: 0:24:59  iter: 1879  total_loss: 0.1509  loss_cls: 0.03588  loss_box_reg: 0.05977  loss_rpn_cls: 0.04576  loss_rpn_loc: 0.01176  time: 1.3422  data_time: 0.0454  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:31:14 fvcore.common.checkpoint]: [0mSaving checkpoint to ./output/fsod/finetune_dir/R_50_C4_1x_5shot/model_0001899.pth
+[32m[02/01 21:31:15 d2.utils.events]: [0m eta: 0:24:33  iter: 1899  total_loss: 0.1542  loss_cls: 0.03739  loss_box_reg: 0.05965  loss_rpn_cls: 0.03976  loss_rpn_loc: 0.01172  time: 1.3422  data_time: 0.0432  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:31:41 d2.utils.events]: [0m eta: 0:24:07  iter: 1919  total_loss: 0.146  loss_cls: 0.03604  loss_box_reg: 0.05912  loss_rpn_cls: 0.03979  loss_rpn_loc: 0.0131  time: 1.3421  data_time: 0.0457  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:32:08 d2.utils.events]: [0m eta: 0:23:40  iter: 1939  total_loss: 0.1445  loss_cls: 0.03406  loss_box_reg: 0.0598  loss_rpn_cls: 0.0336  loss_rpn_loc: 0.01132  time: 1.3421  data_time: 0.0460  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:32:35 d2.utils.events]: [0m eta: 0:23:13  iter: 1959  total_loss: 0.1602  loss_cls: 0.04002  loss_box_reg: 0.06001  loss_rpn_cls: 0.04557  loss_rpn_loc: 0.01171  time: 1.3420  data_time: 0.0419  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:33:02 d2.utils.events]: [0m eta: 0:22:46  iter: 1979  total_loss: 0.1576  loss_cls: 0.03303  loss_box_reg: 0.06042  loss_rpn_cls: 0.04397  loss_rpn_loc: 0.01423  time: 1.3422  data_time: 0.0464  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:33:29 fvcore.common.checkpoint]: [0mSaving checkpoint to ./output/fsod/finetune_dir/R_50_C4_1x_5shot/model_0001999.pth
+[32m[02/01 21:33:30 d2.utils.events]: [0m eta: 0:22:20  iter: 1999  total_loss: 0.1434  loss_cls: 0.03465  loss_box_reg: 0.05931  loss_rpn_cls: 0.03566  loss_rpn_loc: 0.0102  time: 1.3422  data_time: 0.0466  lr: 0.0001  max_mem: 5179M
+[32m[02/01 21:33:56 d2.utils.events]: [0m eta: 0:21:52  iter: 2019  total_loss: 0.1534  loss_cls: 0.0322  loss_box_reg: 0.06089  loss_rpn_cls: 0.04404  loss_rpn_loc: 0.01036  time: 1.3419  data_time: 0.0447  lr: 1e-05  max_mem: 5179M
+[32m[02/01 21:34:22 d2.utils.events]: [0m eta: 0:21:25  iter: 2039  total_loss: 0.1544  loss_cls: 0.03056  loss_box_reg: 0.06323  loss_rpn_cls: 0.04228  loss_rpn_loc: 0.01165  time: 1.3414  data_time: 0.0414  lr: 1e-05  max_mem: 5179M
+[32m[02/01 21:34:48 d2.utils.events]: [0m eta: 0:20:57  iter: 2059  total_loss: 0.1526  loss_cls: 0.03335  loss_box_reg: 0.06051  loss_rpn_cls: 0.0387  loss_rpn_loc: 0.01182  time: 1.3409  data_time: 0.0371  lr: 1e-05  max_mem: 5179M
+[32m[02/01 21:35:14 d2.utils.events]: [0m eta: 0:20:30  iter: 2079  total_loss: 0.1536  loss_cls: 0.03407  loss_box_reg: 0.06123  loss_rpn_cls: 0.03817  loss_rpn_loc: 0.01091  time: 1.3407  data_time: 0.0393  lr: 1e-05  max_mem: 5179M
+[32m[02/01 21:35:40 fvcore.common.checkpoint]: [0mSaving checkpoint to ./output/fsod/finetune_dir/R_50_C4_1x_5shot/model_0002099.pth
+[32m[02/01 21:35:41 d2.utils.events]: [0m eta: 0:20:03  iter: 2099  total_loss: 0.1494  loss_cls: 0.03504  loss_box_reg: 0.06198  loss_rpn_cls: 0.04035  loss_rpn_loc: 0.01141  time: 1.3404  data_time: 0.0386  lr: 1e-05  max_mem: 5179M
+[32m[02/01 21:36:07 d2.utils.events]: [0m eta: 0:19:35  iter: 2119  total_loss: 0.1485  loss_cls: 0.03239  loss_box_reg: 0.0613  loss_rpn_cls: 0.04013  loss_rpn_loc: 0.01217  time: 1.3401  data_time: 0.0409  lr: 1e-05  max_mem: 5179M
+[32m[02/01 21:36:34 d2.utils.events]: [0m eta: 0:19:08  iter: 2139  total_loss: 0.1505  loss_cls: 0.03612  loss_box_reg: 0.05854  loss_rpn_cls: 0.04033  loss_rpn_loc: 0.01293  time: 1.3399  data_time: 0.0383  lr: 1e-05  max_mem: 5179M
+[32m[02/01 21:37:00 d2.utils.events]: [0m eta: 0:18:41  iter: 2159  total_loss: 0.1517  loss_cls: 0.03442  loss_box_reg: 0.05987  loss_rpn_cls: 0.03718  loss_rpn_loc: 0.01218  time: 1.3397  data_time: 0.0426  lr: 1e-05  max_mem: 5179M
+[32m[02/01 21:37:26 d2.utils.events]: [0m eta: 0:18:13  iter: 2179  total_loss: 0.1438  loss_cls: 0.03382  loss_box_reg: 0.06105  loss_rpn_cls: 0.03712  loss_rpn_loc: 0.01204  time: 1.3394  data_time: 0.0378  lr: 1e-05  max_mem: 5179M
+[32m[02/01 21:37:53 fvcore.common.checkpoint]: [0mSaving checkpoint to ./output/fsod/finetune_dir/R_50_C4_1x_5shot/model_0002199.pth
+[32m[02/01 21:37:53 d2.utils.events]: [0m eta: 0:17:46  iter: 2199  total_loss: 0.1556  loss_cls: 0.03223  loss_box_reg: 0.06206  loss_rpn_cls: 0.04033  loss_rpn_loc: 0.01168  time: 1.3391  data_time: 0.0391  lr: 1e-05  max_mem: 5179M
+[32m[02/01 21:38:20 d2.utils.events]: [0m eta: 0:17:19  iter: 2219  total_loss: 0.1498  loss_cls: 0.03283  loss_box_reg: 0.06266  loss_rpn_cls: 0.03687  loss_rpn_loc: 0.01035  time: 1.3390  data_time: 0.0478  lr: 1e-05  max_mem: 5179M
+[32m[02/01 21:38:46 d2.utils.events]: [0m eta: 0:16:53  iter: 2239  total_loss: 0.148  loss_cls: 0.03143  loss_box_reg: 0.05853  loss_rpn_cls: 0.03665  loss_rpn_loc: 0.01185  time: 1.3388  data_time: 0.0421  lr: 1e-05  max_mem: 5179M
+[32m[02/01 21:39:12 d2.utils.events]: [0m eta: 0:16:25  iter: 2259  total_loss: 0.1489  loss_cls: 0.03578  loss_box_reg: 0.06193  loss_rpn_cls: 0.04475  loss_rpn_loc: 0.01111  time: 1.3385  data_time: 0.0402  lr: 1e-05  max_mem: 5179M
+[32m[02/01 21:39:39 d2.utils.events]: [0m eta: 0:15:58  iter: 2279  total_loss: 0.1472  loss_cls: 0.03681  loss_box_reg: 0.06096  loss_rpn_cls: 0.04394  loss_rpn_loc: 0.01143  time: 1.3383  data_time: 0.0423  lr: 1e-05  max_mem: 5179M
+[32m[02/01 21:40:05 fvcore.common.checkpoint]: [0mSaving checkpoint to ./output/fsod/finetune_dir/R_50_C4_1x_5shot/model_0002299.pth
+[32m[02/01 21:40:06 d2.utils.events]: [0m eta: 0:15:31  iter: 2299  total_loss: 0.1463  loss_cls: 0.03841  loss_box_reg: 0.06  loss_rpn_cls: 0.03933  loss_rpn_loc: 0.009997  time: 1.3380  data_time: 0.0446  lr: 1e-05  max_mem: 5179M
+[32m[02/01 21:40:32 d2.utils.events]: [0m eta: 0:15:04  iter: 2319  total_loss: 0.1531  loss_cls: 0.03396  loss_box_reg: 0.05994  loss_rpn_cls: 0.04726  loss_rpn_loc: 0.01316  time: 1.3378  data_time: 0.0466  lr: 1e-05  max_mem: 5179M
+[32m[02/01 21:40:59 d2.utils.events]: [0m eta: 0:14:37  iter: 2339  total_loss: 0.1434  loss_cls: 0.03536  loss_box_reg: 0.05853  loss_rpn_cls: 0.03876  loss_rpn_loc: 0.01071  time: 1.3379  data_time: 0.0490  lr: 1e-05  max_mem: 5179M
+[32m[02/01 21:41:25 d2.utils.events]: [0m eta: 0:14:10  iter: 2359  total_loss: 0.1541  loss_cls: 0.03695  loss_box_reg: 0.06299  loss_rpn_cls: 0.04155  loss_rpn_loc: 0.01459  time: 1.3377  data_time: 0.0405  lr: 1e-05  max_mem: 5179M
+[32m[02/01 21:41:52 d2.utils.events]: [0m eta: 0:13:43  iter: 2379  total_loss: 0.1517  loss_cls: 0.03407  loss_box_reg: 0.05869  loss_rpn_cls: 0.04448  loss_rpn_loc: 0.01167  time: 1.3374  data_time: 0.0381  lr: 1e-05  max_mem: 5179M
+[32m[02/01 21:42:18 fvcore.common.checkpoint]: [0mSaving checkpoint to ./output/fsod/finetune_dir/R_50_C4_1x_5shot/model_0002399.pth
+[32m[02/01 21:42:18 d2.utils.events]: [0m eta: 0:13:15  iter: 2399  total_loss: 0.14  loss_cls: 0.02856  loss_box_reg: 0.0572  loss_rpn_cls: 0.03743  loss_rpn_loc: 0.01134  time: 1.3372  data_time: 0.0414  lr: 1e-05  max_mem: 5179M
+[32m[02/01 21:42:45 d2.utils.events]: [0m eta: 0:12:49  iter: 2419  total_loss: 0.1537  loss_cls: 0.03772  loss_box_reg: 0.06148  loss_rpn_cls: 0.04238  loss_rpn_loc: 0.01499  time: 1.3371  data_time: 0.0408  lr: 1e-05  max_mem: 5179M
+[32m[02/01 21:43:11 d2.utils.events]: [0m eta: 0:12:22  iter: 2439  total_loss: 0.1555  loss_cls: 0.03457  loss_box_reg: 0.0621  loss_rpn_cls: 0.04305  loss_rpn_loc: 0.01369  time: 1.3370  data_time: 0.0389  lr: 1e-05  max_mem: 5179M
+[32m[02/01 21:43:38 d2.utils.events]: [0m eta: 0:11:55  iter: 2459  total_loss: 0.1478  loss_cls: 0.03454  loss_box_reg: 0.06099  loss_rpn_cls: 0.03982  loss_rpn_loc: 0.01074  time: 1.3369  data_time: 0.0453  lr: 1e-05  max_mem: 5179M
+[32m[02/01 21:44:04 d2.utils.events]: [0m eta: 0:11:29  iter: 2479  total_loss: 0.149  loss_cls: 0.03351  loss_box_reg: 0.05889  loss_rpn_cls: 0.03876  loss_rpn_loc: 0.01356  time: 1.3367  data_time: 0.0396  lr: 1e-05  max_mem: 5179M
+[32m[02/01 21:44:31 fvcore.common.checkpoint]: [0mSaving checkpoint to ./output/fsod/finetune_dir/R_50_C4_1x_5shot/model_0002499.pth
+[32m[02/01 21:44:31 d2.utils.events]: [0m eta: 0:11:02  iter: 2499  total_loss: 0.1515  loss_cls: 0.0335  loss_box_reg: 0.06122  loss_rpn_cls: 0.03965  loss_rpn_loc: 0.01295  time: 1.3365  data_time: 0.0379  lr: 1e-05  max_mem: 5179M
+[32m[02/01 21:44:58 d2.utils.events]: [0m eta: 0:10:35  iter: 2519  total_loss: 0.1458  loss_cls: 0.03901  loss_box_reg: 0.05942  loss_rpn_cls: 0.03905  loss_rpn_loc: 0.0128  time: 1.3363  data_time: 0.0397  lr: 1e-05  max_mem: 5179M
+[32m[02/01 21:45:24 d2.utils.events]: [0m eta: 0:10:08  iter: 2539  total_loss: 0.1406  loss_cls: 0.0366  loss_box_reg: 0.05833  loss_rpn_cls: 0.03609  loss_rpn_loc: 0.01027  time: 1.3361  data_time: 0.0419  lr: 1e-05  max_mem: 5179M
+[32m[02/01 21:45:51 d2.utils.events]: [0m eta: 0:09:42  iter: 2559  total_loss: 0.157  loss_cls: 0.03786  loss_box_reg: 0.06161  loss_rpn_cls: 0.04653  loss_rpn_loc: 0.01488  time: 1.3360  data_time: 0.0457  lr: 1e-05  max_mem: 5179M
+[32m[02/01 21:46:16 d2.utils.events]: [0m eta: 0:09:15  iter: 2579  total_loss: 0.1407  loss_cls: 0.035  loss_box_reg: 0.06058  loss_rpn_cls: 0.03453  loss_rpn_loc: 0.01015  time: 1.3357  data_time: 0.0380  lr: 1e-05  max_mem: 5179M
+[32m[02/01 21:46:43 fvcore.common.checkpoint]: [0mSaving checkpoint to ./output/fsod/finetune_dir/R_50_C4_1x_5shot/model_0002599.pth
+[32m[02/01 21:46:44 d2.utils.events]: [0m eta: 0:08:48  iter: 2599  total_loss: 0.152  loss_cls: 0.03547  loss_box_reg: 0.05937  loss_rpn_cls: 0.04594  loss_rpn_loc: 0.01396  time: 1.3356  data_time: 0.0485  lr: 1e-05  max_mem: 5179M
+[32m[02/01 21:47:10 d2.utils.events]: [0m eta: 0:08:21  iter: 2619  total_loss: 0.1543  loss_cls: 0.03826  loss_box_reg: 0.06035  loss_rpn_cls: 0.0427  loss_rpn_loc: 0.01178  time: 1.3355  data_time: 0.0436  lr: 1e-05  max_mem: 5179M
+[32m[02/01 21:47:36 d2.utils.events]: [0m eta: 0:07:55  iter: 2639  total_loss: 0.1514  loss_cls: 0.03221  loss_box_reg: 0.06027  loss_rpn_cls: 0.04313  loss_rpn_loc: 0.01149  time: 1.3352  data_time: 0.0401  lr: 1e-05  max_mem: 5179M
+[32m[02/01 21:48:03 d2.utils.events]: [0m eta: 0:07:28  iter: 2659  total_loss: 0.1554  loss_cls: 0.03805  loss_box_reg: 0.05766  loss_rpn_cls: 0.03949  loss_rpn_loc: 0.01304  time: 1.3351  data_time: 0.0406  lr: 1e-05  max_mem: 5179M
+[32m[02/01 21:48:29 d2.utils.events]: [0m eta: 0:07:01  iter: 2679  total_loss: 0.1583  loss_cls: 0.03627  loss_box_reg: 0.06106  loss_rpn_cls: 0.03522  loss_rpn_loc: 0.0135  time: 1.3350  data_time: 0.0425  lr: 1e-05  max_mem: 5179M
+[32m[02/01 21:48:55 fvcore.common.checkpoint]: [0mSaving checkpoint to ./output/fsod/finetune_dir/R_50_C4_1x_5shot/model_0002699.pth
+[32m[02/01 21:48:56 d2.utils.events]: [0m eta: 0:06:35  iter: 2699  total_loss: 0.1447  loss_cls: 0.02981  loss_box_reg: 0.06111  loss_rpn_cls: 0.03898  loss_rpn_loc: 0.01152  time: 1.3349  data_time: 0.0479  lr: 1e-05  max_mem: 5179M
+[32m[02/01 21:49:23 d2.utils.events]: [0m eta: 0:06:09  iter: 2719  total_loss: 0.1486  loss_cls: 0.03718  loss_box_reg: 0.05974  loss_rpn_cls: 0.03645  loss_rpn_loc: 0.01183  time: 1.3348  data_time: 0.0416  lr: 1e-05  max_mem: 5179M
+[32m[02/01 21:49:49 d2.utils.events]: [0m eta: 0:05:42  iter: 2739  total_loss: 0.16  loss_cls: 0.03791  loss_box_reg: 0.06224  loss_rpn_cls: 0.04815  loss_rpn_loc: 0.01296  time: 1.3347  data_time: 0.0445  lr: 1e-05  max_mem: 5179M
+[32m[02/01 21:50:15 d2.utils.events]: [0m eta: 0:05:16  iter: 2759  total_loss: 0.157  loss_cls: 0.03453  loss_box_reg: 0.0606  loss_rpn_cls: 0.04368  loss_rpn_loc: 0.01386  time: 1.3346  data_time: 0.0411  lr: 1e-05  max_mem: 5179M
+[32m[02/01 21:50:42 d2.utils.events]: [0m eta: 0:04:49  iter: 2779  total_loss: 0.1429  loss_cls: 0.03249  loss_box_reg: 0.05926  loss_rpn_cls: 0.03783  loss_rpn_loc: 0.01052  time: 1.3344  data_time: 0.0470  lr: 1e-05  max_mem: 5179M
+[32m[02/01 21:51:08 fvcore.common.checkpoint]: [0mSaving checkpoint to ./output/fsod/finetune_dir/R_50_C4_1x_5shot/model_0002799.pth
+[32m[02/01 21:51:09 d2.utils.events]: [0m eta: 0:04:23  iter: 2799  total_loss: 0.16  loss_cls: 0.03563  loss_box_reg: 0.06043  loss_rpn_cls: 0.05085  loss_rpn_loc: 0.01363  time: 1.3343  data_time: 0.0371  lr: 1e-05  max_mem: 5179M
+[32m[02/01 21:51:35 d2.utils.events]: [0m eta: 0:03:56  iter: 2819  total_loss: 0.1496  loss_cls: 0.03534  loss_box_reg: 0.05957  loss_rpn_cls: 0.04005  loss_rpn_loc: 0.01267  time: 1.3342  data_time: 0.0408  lr: 1e-05  max_mem: 5179M
+[32m[02/01 21:52:02 d2.utils.events]: [0m eta: 0:03:30  iter: 2839  total_loss: 0.1544  loss_cls: 0.03333  loss_box_reg: 0.05988  loss_rpn_cls: 0.04078  loss_rpn_loc: 0.01282  time: 1.3341  data_time: 0.0370  lr: 1e-05  max_mem: 5179M
+[32m[02/01 21:52:28 d2.utils.events]: [0m eta: 0:03:04  iter: 2859  total_loss: 0.1462  loss_cls: 0.03483  loss_box_reg: 0.05827  loss_rpn_cls: 0.0373  loss_rpn_loc: 0.01146  time: 1.3340  data_time: 0.0417  lr: 1e-05  max_mem: 5179M
+[32m[02/01 21:52:54 d2.utils.events]: [0m eta: 0:02:37  iter: 2879  total_loss: 0.1432  loss_cls: 0.03229  loss_box_reg: 0.0593  loss_rpn_cls: 0.03932  loss_rpn_loc: 0.01308  time: 1.3338  data_time: 0.0398  lr: 1e-05  max_mem: 5179M
+[32m[02/01 21:53:21 fvcore.common.checkpoint]: [0mSaving checkpoint to ./output/fsod/finetune_dir/R_50_C4_1x_5shot/model_0002899.pth
+[32m[02/01 21:53:22 d2.utils.events]: [0m eta: 0:02:11  iter: 2899  total_loss: 0.1495  loss_cls: 0.03758  loss_box_reg: 0.05938  loss_rpn_cls: 0.03925  loss_rpn_loc: 0.01044  time: 1.3338  data_time: 0.0409  lr: 1e-05  max_mem: 5179M
+[32m[02/01 21:53:52 d2.utils.events]: [0m eta: 0:01:45  iter: 2919  total_loss: 0.1484  loss_cls: 0.03332  loss_box_reg: 0.06133  loss_rpn_cls: 0.03712  loss_rpn_loc: 0.01063  time: 1.3348  data_time: 0.0702  lr: 1e-06  max_mem: 5179M
+[32m[02/01 21:54:21 d2.utils.events]: [0m eta: 0:01:18  iter: 2939  total_loss: 0.157  loss_cls: 0.03411  loss_box_reg: 0.06433  loss_rpn_cls: 0.04094  loss_rpn_loc: 0.01499  time: 1.3358  data_time: 0.0683  lr: 1e-06  max_mem: 5179M
+[32m[02/01 21:54:51 d2.utils.events]: [0m eta: 0:00:52  iter: 2959  total_loss: 0.1554  loss_cls: 0.03667  loss_box_reg: 0.06192  loss_rpn_cls: 0.04368  loss_rpn_loc: 0.01068  time: 1.3369  data_time: 0.0733  lr: 1e-06  max_mem: 5179M
+[32m[02/01 21:55:20 d2.utils.events]: [0m eta: 0:00:26  iter: 2979  total_loss: 0.1567  loss_cls: 0.03439  loss_box_reg: 0.05803  loss_rpn_cls: 0.04344  loss_rpn_loc: 0.01588  time: 1.3376  data_time: 0.0654  lr: 1e-06  max_mem: 5179M
+[32m[02/01 21:55:50 fvcore.common.checkpoint]: [0mSaving checkpoint to ./output/fsod/finetune_dir/R_50_C4_1x_5shot/model_0002999.pth
+[32m[02/01 21:55:51 fvcore.common.checkpoint]: [0mSaving checkpoint to ./output/fsod/finetune_dir/R_50_C4_1x_5shot/model_final.pth
+[32m[02/01 21:55:52 d2.utils.events]: [0m eta: 0:00:00  iter: 2999  total_loss: 0.1486  loss_cls: 0.03981  loss_box_reg: 0.0595  loss_rpn_cls: 0.03691  loss_rpn_loc: 0.009645  time: 1.3388  data_time: 0.0660  lr: 1e-06  max_mem: 5179M
+[32m[02/01 21:55:52 d2.engine.hooks]: [0mOverall training speed: 2998 iterations in 1:06:53 (1.3388 s / it)
+[32m[02/01 21:55:52 d2.engine.hooks]: [0mTotal training time: 1:07:22 (0:00:28 on hooks)
+[32m[02/01 21:55:53 d2.data.datasets.coco]: [0mLoaded 5000 images in COCO format from datasets/coco/annotations/instances_val2017.json
+[32m[02/01 21:55:53 d2.data.build]: [0mDistribution of instances among all 80 categories:
+[36m|   category    | #instances   |   category   | #instances   |   category    | #instances   |
+|:-------------:|:-------------|:------------:|:-------------|:-------------:|:-------------|
+|    person     | 10777        |   bicycle    | 314          |      car      | 1918         |
+|  motorcycle   | 367          |   airplane   | 143          |      bus      | 283          |
+|     train     | 190          |    truck     | 414          |     boat      | 424          |
+| traffic light | 634          | fire hydrant | 101          |   stop sign   | 75           |
+| parking meter | 60           |    bench     | 411          |     bird      | 427          |
+|      cat      | 202          |     dog      | 218          |     horse     | 272          |
+|     sheep     | 354          |     cow      | 372          |   elephant    | 252          |
+|     bear      | 71           |    zebra     | 266          |    giraffe    | 232          |
+|   backpack    | 371          |   umbrella   | 407          |    handbag    | 540          |
+|      tie      | 252          |   suitcase   | 299          |    frisbee    | 115          |
+|     skis      | 241          |  snowboard   | 69           |  sports ball  | 260          |
+|     kite      | 327          | baseball bat | 145          | baseball gl.. | 148          |
+|  skateboard   | 179          |  surfboard   | 267          | tennis racket | 225          |
+|    bottle     | 1013         |  wine glass  | 341          |      cup      | 895          |
+|     fork      | 215          |    knife     | 325          |     spoon     | 253          |
+|     bowl      | 623          |    banana    | 370          |     apple     | 236          |
+|   sandwich    | 177          |    orange    | 285          |   broccoli    | 312          |
+|    carrot     | 365          |   hot dog    | 125          |     pizza     | 284          |
+|     donut     | 328          |     cake     | 310          |     chair     | 1771         |
+|     couch     | 261          | potted plant | 342          |      bed      | 163          |
+| dining table  | 695          |    toilet    | 179          |      tv       | 288          |
+|    laptop     | 231          |    mouse     | 106          |    remote     | 283          |
+|   keyboard    | 153          |  cell phone  | 262          |   microwave   | 55           |
+|     oven      | 143          |   toaster    | 9            |     sink      | 225          |
+| refrigerator  | 126          |     book     | 1129         |     clock     | 267          |
+|     vase      | 274          |   scissors   | 36           |  teddy bear   | 190          |
+|  hair drier   | 11           |  toothbrush  | 57           |               |              |
+|     total     | 36335        |              |              |               |              |[0m
+[32m[02/01 21:55:53 d2.data.common]: [0mSerializing 5000 elements to byte tensors and concatenating them all ...
+[32m[02/01 21:55:53 d2.data.common]: [0mSerialized dataset takes 19.10 MiB
+[32m[02/01 21:55:53 d2.data.dataset_mapper]: [0m[DatasetMapper] Augmentations used in inference: [ResizeShortestEdge(short_edge_length=(600, 600), max_size=1000, sample_style='choice')]
+[32m[02/01 21:55:54 d2.evaluation.evaluator]: [0mStart inference on 5000 batches
+/home/lcheng/FewX-master/FewX-master/fewx/modeling/fsod/fsod_fast_rcnn.py:213: UserWarning: This overload of nonzero is deprecated:
+	nonzero()
+Consider using one of the following signatures instead:
+	nonzero(*, bool as_tuple) (Triggered internally at  /pytorch/torch/csrc/utils/python_arg_parser.cpp:882.)
+  num_fg = fg_inds.nonzero().numel()
+[32m[02/01 21:55:56 fewx.modeling.fsod.fsod_rcnn]: [0m=========== Offline support features are generated. ===========
+[32m[02/01 21:55:56 fewx.modeling.fsod.fsod_rcnn]: [0m============ Few-shot object detetion will start. =============
