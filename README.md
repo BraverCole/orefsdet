@@ -52,7 +52,7 @@ python -m pip install detectron2 -f \
 ```
 
 ## Step 2: Prepare dataset
-- Prepare for ore dataset, you can get from [here](https://github.com/facebookresearch/detectron2/tree/master/datasets). The ore dataset has been handled under few-shot setting, you only need to add it to dataset.
+- Prepare for ore dataset, you can get from [here](https://drive.google.com/file/d/1eYkPHgDWULHind802P4tvy9l7lIQrpqk/view?usp=share_link). The ore dataset has been handled under few-shot setting, you only need to add it to dataset.
 
 
 ## Step 3: Training and Evaluation
