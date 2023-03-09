@@ -27,8 +27,8 @@ To date, FewX implements the following algorithms:
 ### Few Shot Object Detection
 <table>
     <tr>
-        <tdrowspan="2">Method</td>
-        <tdcolspan="2">5-shot</td>
+        <td rowspan="2">Method</td>
+        <td colspan="2">5-shot</td>
         <td></td>
         <td colspan="2">15-shot</td>
         <td></td>
